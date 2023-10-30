@@ -16,8 +16,8 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install sshpass
 
-      - name: Login & Deploy
+      - name: Deploy using sshpass
         env:
           DROPLET_PASSWORD: ${{ secrets.DROPLET_PASSWORD }}
         run: |
-          sshpass -p "${DROPLET_PASSWORD}" ssh root@68.183.9.57
+          sshpass -p "${DROPLET_PASSWORD}" ssh -o StrictHostKeyChecking=no root@68.183.9.57 'cd ~/root/goose && git pull origin main && docker compose build && docker compose up -d'
