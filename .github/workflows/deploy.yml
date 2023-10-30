@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install sshpass
+        run: sudo apt-get install sshpass
+
       - name: Deploy
         run: |
           sshpass -p "${DROPLET_PASSWORD}" ssh root@68.183.9.57 'cd /path/to/your/app && git pull origin main && docker compose build && docker compose up -d'
