@@ -1,0 +1,27 @@
+# Ignore compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore dependencies
+/node_modules
+/bower_components
+
+# Ignore logs and databases
+*.log
+*.sqlite
+*.sqlite3
+*.log.*
+
+# Ignore OS generated files
+.DS_Store
+
+# Ignore editor specific files
+.vscode/
+
+# Ignore environment specific files
+.env
+
+# Ignore cache files
+/be/__pycache__
