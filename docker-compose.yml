@@ -22,3 +22,11 @@ services:
       - ./be:/app
     env_file:
       - .env
+
+  nextjs:
+    build:
+      context: ./fe
+    ports:
+      - "3000:3000"      
+    env_file:
+      - .env.fe

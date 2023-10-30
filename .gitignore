@@ -22,6 +22,8 @@
 
 # Ignore environment specific files
 .env
+.env.fe
 
 # Ignore cache files
 /be/__pycache__
+/fe/node_modules
