@@ -11,14 +11,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Setup SSH and deploy
         run: |
           mkdir -p ~/.ssh
           echo "$DROPLET_SSH" > ~/.ssh/cd_github
           chmod 600 ~/.ssh/cd_github
-          ssh-keyscan 68.183.9.57 >> ~/.ssh/known_hosts
+          ssh-keyscan your_droplet_ip >> ~/.ssh/known_hosts
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/cd_github root@68.183.9.57 'cd ~/root/goose && git pull origin main && docker compose build && docker compose up -d'
         env:
           DROPLET_SSH: ${{ secrets.DROPLET_SSH }}
