@@ -16,8 +16,8 @@ jobs:
       - name: Setup SSH and deploy
         run: |
           mkdir -p ~/.ssh
-          echo "$DROPLET_SSH" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "$DROPLET_SSH" > ~/.ssh/cd-github
+          chmod 600 ~/.ssh/cd-github
           ssh -o StrictHostKeyChecking=no $DROPLET_USERNAME@$DROPLET_IP 'cd ~/root/goose && git pull origin main && docker compose build && docker compose up -d'
         env:
           DROPLET_SSH: ${{ secrets.DROPLET_SSH }}
@@ -26,4 +26,4 @@ jobs:
 
       - name: Clean up
         run: |
-          rm ~/.ssh/id_rsa
+          rm ~/.ssh/cd-github
