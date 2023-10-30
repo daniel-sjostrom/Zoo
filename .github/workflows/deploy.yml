@@ -13,16 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup SSH and deploy
+      - name: Deploy
         run: |
-          mkdir -p ~/.ssh
-          echo "$DROPLET_SSH" > ~/.ssh/cd_github
-          chmod 600 ~/.ssh/cd_github
-          ssh-keyscan 68.183.9.57 >> ~/.ssh/known_hosts
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/cd_github root@68.183.9.57 'cd ~/root/goose && git pull origin main && docker compose build && docker compose up -d'
+          sshpass -p "${DROPLET_PASSWORD}" ssh root@68.183.9.57 'cd /path/to/your/app && git pull origin main && docker compose build && docker compose up -d'
         env:
-          DROPLET_SSH: ${{ secrets.DROPLET_SSH }}
-
-      - name: Clean up
-        run: |
-          rm ~/.ssh/cd_github
+          DROPLET_PASSWORD: ${{ secrets.DROPLET_PASSWORD }}
