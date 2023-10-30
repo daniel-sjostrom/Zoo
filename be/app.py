@@ -10,7 +10,7 @@ SQL_DATABASE_URL = get_database_url()
 
 @app.get("/")
 async def read_root():
-    return {"message": "Hello world!"}
+    return {"message": "Hello DO!"}
 
 
 async def save_post(username: str):
