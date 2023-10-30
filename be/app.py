@@ -10,13 +10,11 @@ SQL_DATABASE_URL = get_database_url()
 
 @app.get("/")
 async def read_root():
-    return {"message": "Hello, FastAPI!"}
+    return {"message": "Hello world!"}
 
 
 async def save_post(username: str):
-    print(SQL_DATABASE_URL)
     conn = await asyncpg.connect(SQL_DATABASE_URL)
-    print("or here?")
     try:
         await conn.execute("INSERT INTO goose_table (username) VALUES ($1)", username)
     finally:

@@ -1,0 +1,29 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH and deploy
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DROPLET_SSH" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -o StrictHostKeyChecking=no $DROPLET_USERNAME@$DROPLET_IP 'cd ~/root/goose && git pull origin main && docker compose build && docker compose up -d'
+        env:
+          DROPLET_SSH: ${{ secrets.DROPLET_SSH }}
+          DROPLET_USERNAME: ${{ secrets.DROPLET_USERNAME }}
+          DROPLET_IP: ${{ secrets.DROPLET_IP }}
+
+      - name: Clean up
+        run: |
+          rm ~/.ssh/id_rsa
