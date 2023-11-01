@@ -10,7 +10,7 @@ SQL_DATABASE_URL = get_database_url()
 
 @app.get("/")
 async def read_root():
-    return {"message": "How fast does it go? 🪿🪿🪿"}
+    return {"hello": "Welcome to the goose backend API 🪿"}
 
 
 async def save_post(username: str):
