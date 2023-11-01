@@ -1,10 +1,10 @@
 import asyncpg
 
-from settings import get_database_url
+from settings import get_database_url, get_app
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException, Body
 
-app = FastAPI()
+app = get_app()
 SQL_DATABASE_URL = get_database_url()
 
 

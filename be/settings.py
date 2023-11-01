@@ -1,3 +1,5 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import os
 from pathlib import Path
 
@@ -13,3 +15,18 @@ class Settings:
 
 def get_database_url():
     return Settings().DATABASE_URL
+
+
+app = FastAPI()
+# Configure CORS (Cross-Origin Resource Sharing)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://68.183.9.57:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+def get_app():
+    return app
