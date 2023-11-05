@@ -1,8 +1,10 @@
 import asyncpg
 
+from api.questions import router as questions_router
 from settings import get_database_url, get_app
+
 from pydantic import BaseModel
-from fastapi import FastAPI, HTTPException, Body
+from fastapi import HTTPException, Body
 
 app = get_app()
 SQL_DATABASE_URL = get_database_url()
@@ -34,3 +36,6 @@ async def easy_post(request: EasyPost = Body(...)):
         return {"message": "Response saved successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+
+app.include_router(questions_router, prefix="/api")
