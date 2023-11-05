@@ -2,7 +2,7 @@
 
 import React, { useState, ChangeEvent } from "react";
 import styles from "./Question.module.css";
-import { copy } from "@/app/copy/en";
+import { copy } from "@/copy/en";
 
 const Question: React.FC = () => {
     const [input, setInput] = useState<string>("");

@@ -1,0 +1,9 @@
+.button {
+    display: "flex";
+    background-color: "red";
+}
+
+.buttonText {
+    margin: 0;
+    font-size: 16;
+}

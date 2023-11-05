@@ -1,10 +1,10 @@
-import Box from "./components/Box";
+import StartHere from "@/components/StartHere";
 import styles from "./page.module.css";
 
 const Home = () => {
     return (
         <main className={styles.main}>
-            <Box />
+            <StartHere />
         </main>
     );
 };
