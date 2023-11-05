@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS goose_table (
 
 CREATE TABLE IF NOT EXISTS questions (
     id TEXT PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
     question TEXT,
     answer TEXT,
     followup_question TEXT,
