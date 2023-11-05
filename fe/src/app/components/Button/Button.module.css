@@ -6,6 +6,7 @@
     padding: 10px 20px;
     border-radius: 20px;
     font-weight: 600;
+    cursor: pointer;
     background: rgb(230,166,235);
     background: linear-gradient(90deg, rgba(230,166,235,1) 0%, rgba(210,209,255,1) 100%); 
 }

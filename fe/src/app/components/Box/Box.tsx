@@ -1,7 +1,10 @@
+"use client";
+
 import { copy } from "@/app/copy/en";
+
 import styles from "./Box.module.css";
 import Question from "./components/Question";
-import Button from "./components/Button";
+import Button from "../Button";
 
 const Box: React.FC = () => {
     return (
@@ -11,7 +14,10 @@ const Box: React.FC = () => {
             <div className={styles.buttonContainer}>
                 <Question />
                 <div className={styles.space_horizontal4} />
-                <Button />
+                <Button
+                    onClick={() => {}}
+                    text={copy.question_form_next_button}
+                />
             </div>
         </div>
     );
