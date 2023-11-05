@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    width: 400px;
+    padding: 30px;
+    background: rgb(48,48,48);
+    background: linear-gradient(180deg, rgba(48,48,48,1) 0%, rgba(37,37,37,1) 90%); 
+    box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.25);
+    -webkit-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.25);
+    -moz-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.25);
+}
+
+.title {
+    color: var(--text-color);
+}
+
+.space2 {
+    height: calc(var(--space) * 2);
+}
+
+.space4 {
+    height: calc(var(--space) * 4);
+}
+
+.space_horizontal4 {
+    width: calc(var(--space) * 4);
+}
+
+.row {
+    display: flex;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+}
