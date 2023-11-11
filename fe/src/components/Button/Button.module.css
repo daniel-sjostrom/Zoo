@@ -4,9 +4,16 @@
     align-items: center;
     border: 0;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
-    background: rgb(230,166,235);
-    background: linear-gradient(90deg, rgba(230,166,235,1) 0%, rgba(210,209,255,1) 100%); 
+    border: 3px solid;
+    background: transparent;
+    border-color: rgb(130, 250, 130);
+    color: var(--text-color);
+}
+
+.button:hover {
+    position: relative;
+    bottom: 3px;
 }

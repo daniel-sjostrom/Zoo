@@ -1,14 +1,15 @@
 "use client";
 
+import Button from "@/components/Button";
 import styles from "./Box.module.css";
 import Question from "./components/Question";
-import Button from "../Button";
+
 import { copy } from "@/copy/en";
 
 const Box: React.FC = () => {
     return (
         <div className={styles.container}>
-            <h2 className={styles.title}>{copy.question_form_title}</h2>
+            <h2>{copy.question_form_title}</h2>
             <div className={styles.space4} />
             <div className={styles.buttonContainer}>
                 <Question />

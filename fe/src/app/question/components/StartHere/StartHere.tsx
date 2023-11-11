@@ -3,25 +3,24 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { copy } from "@/copy/en";
-import useQuestionStore from "@/stores/useQuestionStore";
-
-import Button from "../Button";
+import useQuestionStore from "@/app/stores/useQuestionStore";
+import Button from "@/components/Button";
 
 const StartHere = () => {
     const router = useRouter();
     const getQuestionID = useQuestionStore((state) => state.getQuestionID);
-    const data = useQuestionStore((state) => state.data);
+    const questionData = useQuestionStore((state) => state.data);
 
     const onClick = async () => {
-        await getQuestionID();
+        await getQuestionID().then(() => {});
     };
 
-    // Navigate after we have the question ID
+    // Navigate after question ID fetch
     useEffect(() => {
-        if (data !== undefined) {
-            router.push(`/question/${data.question_id}`);
+        if (questionData !== undefined) {
+            router.push(`/question/${questionData.question_id}`);
         }
-    }, [data, router]);
+    }, [questionData, router]);
 
     return <Button onClick={onClick}>{copy.home_start_here_button}</Button>;
 };

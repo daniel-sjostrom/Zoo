@@ -1,7 +1,7 @@
-import StartHere from "@/components/StartHere";
+import StartHere from "./components/StartHere";
 import styles from "./page.module.css";
 
-const Home = () => {
+const QuestionPage = () => {
     return (
         <main className={styles.main}>
             <StartHere />
@@ -9,4 +9,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default QuestionPage;

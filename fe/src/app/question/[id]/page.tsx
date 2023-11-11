@@ -1,21 +1,20 @@
 "use client";
 
-import Button from "@/components/Button";
-import useQuestionStore from "@/stores/useQuestionStore";
+import useQuestionStore from "@/app/stores/useQuestionStore";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
 
-function DynamicLinkPage() {
+import Box from "./components/Box";
+import styles from "./page.module.css";
+
+function QuestionForm() {
     const { id } = useParams();
     const questionData = useQuestionStore((state) => state.data);
 
     return (
-        <div>
-            <h1>Dynamic Link Page</h1>
-            <p>Router ID: {id}</p>
-            <p>Question ID: {questionData?.question_id}</p>
+        <div className={styles.main}>
+            <Box />
         </div>
     );
 }
 
-export default DynamicLinkPage;
+export default QuestionForm;
