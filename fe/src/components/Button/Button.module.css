@@ -8,12 +8,30 @@
     font-weight: 600;
     cursor: pointer;
     border: 3px solid;
-    background: transparent;
+    background: var(--background-color);
     border-color: rgb(130, 250, 130);
     color: var(--text-color);
+    position: relative;
+    z-index: 1;
 }
 
 .button:hover {
     position: relative;
     bottom: 3px;
+}
+
+.buttonHoverShadow {
+    position: relative;
+    background: var(--button-color-shadow);
+    height: 10px;
+    bottom: 10px;
+    margin-bottom: -14px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 2px solid;
+    border-color: var(--button-color-border);
+}
+
+.secondaryButton {
+    border-color: var(--button-color-border);
 }

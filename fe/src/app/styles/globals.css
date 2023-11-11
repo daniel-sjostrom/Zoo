@@ -10,6 +10,8 @@
   --background-color: #202020; 
   --box-color-dark: #252525;
   --box-color-light: #303030;
+  --button-color-shadow: #404040;
+  --button-color-border: #505050;
   --text-color: #EAEAEA;
   --space: 4px;
 }

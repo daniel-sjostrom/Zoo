@@ -3,5 +3,16 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    flex-direction: column;
   }
+
+  .addButtonContainer {
+    display: flex;
+    width: 460px;
+    flex-direction: flex-start;
+  }
+
+  .space4 {
+    height: calc(var(--space) * 4);
+}
   
