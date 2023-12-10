@@ -35,3 +35,8 @@
 .secondaryButton {
     border-color: var(--button-color-border);
 }
+
+.loading {
+    border-color: var(--button-color-border);
+    color: var(--button-color-border);
+}
