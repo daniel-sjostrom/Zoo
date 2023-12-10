@@ -20,4 +20,4 @@ jobs:
         env:
           DROPLET_PASSWORD: ${{ secrets.DROPLET_PASSWORD }}
         run: |
-          sshpass -p "${DROPLET_PASSWORD}" ssh -o StrictHostKeyChecking=no root@68.183.9.57 'cd ~/goose && git pull origin main && ./build-prod.sh'
+          sshpass -p "${DROPLET_PASSWORD}" ssh -o StrictHostKeyChecking=no root@68.183.9.57 'cd ~/super-duper-analytics && git pull origin main && ./build-prod.sh'
