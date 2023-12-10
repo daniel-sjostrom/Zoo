@@ -27,12 +27,6 @@ const QuestionForm = () => {
                     </Button>
                 </div>
             </Box>
-            <div className={commonStyles.space4} />
-            <div className={styles.addButtonContainer}>
-                <Button secondaryButton onClick={() => {}}>
-                    {copy.question_form_add_button}
-                </Button>
-            </div>
         </div>
     );
 };
