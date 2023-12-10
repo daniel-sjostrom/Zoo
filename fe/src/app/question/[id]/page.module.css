@@ -6,13 +6,14 @@
     flex-direction: column;
   }
 
-  .addButtonContainer {
-    display: flex;
-    width: 460px;
-    flex-direction: flex-start;
-  }
+.addButtonContainer {
+  display: flex;
+  width: 460px;
+  flex-direction: flex-start;
+}
 
-  .space4 {
-    height: calc(var(--space) * 4);
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
 }
   
