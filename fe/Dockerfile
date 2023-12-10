@@ -14,4 +14,4 @@ EXPOSE 3000
 
 CMD [ "sh", "-c", "if [ \"$ENV\" = \"prod\" ]; then npm start; else npm run dev; fi" ]
 
-RUN echo "Successfully built {$ENV} environment for goose 🪿🪿🪿"
+RUN echo "Successfully built {$ENV} environment for Super duper analytics 🦸‍♀️"

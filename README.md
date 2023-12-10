@@ -1,3 +1,3 @@
-# goose
+# Super duper analytics
 
-The monorepo for "goose" 🪿
+The monorepo for Super duper analytics 🦸‍♀️
