@@ -1,4 +1,5 @@
 import asyncpg
+from pydantic import BaseModel
 from fastapi import APIRouter
 import random
 import string
@@ -26,3 +27,25 @@ async def generate_unique_id():
     await insert_id(id)
 
     return {"question_id": id}
+
+
+async def insert_question(id: str, question: str):
+    conn = await asyncpg.connect(SQL_DATABASE_URL)
+    try:
+        await conn.execute(
+            "UPDATE questions SET question = $2 WHERE id = $1", id, question
+        )
+    finally:
+        await conn.close()
+
+
+class QuestionInput(BaseModel):
+    id: str
+    question: str
+
+
+@router.post("/questions")
+async def save_question(question_input: QuestionInput):
+    await insert_question(question_input.id, question_input.question)
+
+    return {"response": "Question saved successfully"}

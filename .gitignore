@@ -25,5 +25,5 @@
 .env.fe
 
 # Ignore cache files
-/be/__pycache__
+*__pycache__
 /fe/node_modules
