@@ -3,11 +3,7 @@ CREATE TABLE IF NOT EXISTS super_duper_table (
 	username VARCHAR ( 50 ) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS questions (
+CREATE TABLE IF NOT EXISTS ai (
     id TEXT PRIMARY KEY,
-    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
-    question TEXT,
-    answer TEXT,
-    followup_question TEXT,
-    followup_answer TEXT
+    user_id TEXT NOT NULL,
 );

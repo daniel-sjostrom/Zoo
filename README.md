@@ -1,3 +1,3 @@
-# Super duper analytics
+# Super duper
 
-The monorepo for Super duper analytics 🦸‍♀️
+The monorepo for Super duper 🦸‍♀️

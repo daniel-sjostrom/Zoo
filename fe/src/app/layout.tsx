@@ -5,8 +5,8 @@ import "./styles/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Super duper analytics",
-    description: "Super duper analytics app",
+    title: "Super duper",
+    description: "Super duper app",
 };
 
 interface Props {
