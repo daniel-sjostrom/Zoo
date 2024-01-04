@@ -1,6 +1,6 @@
 import asyncpg
 
-from api.questions import router as questions_router
+from api.create_ai import router as create_ai_router
 from settings import get_database_url, get_app
 
 from pydantic import BaseModel
@@ -40,4 +40,4 @@ async def easy_post(request: EasyPost = Body(...)):
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
 
 
-app.include_router(questions_router, prefix="/api")
+app.include_router(create_ai_router, prefix="/api")

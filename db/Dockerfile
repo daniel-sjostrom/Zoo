@@ -1,3 +1,4 @@
 FROM postgres:16
 
-COPY init.sql /docker-entrypoint-initdb.d/
+# Copy the entire init-scripts directory into the container
+COPY ./init-scripts/ /docker-entrypoint-initdb.d/

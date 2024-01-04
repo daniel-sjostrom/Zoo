@@ -10,3 +10,5 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - ./db/init-scripts:/docker-entrypoint-initdb.d

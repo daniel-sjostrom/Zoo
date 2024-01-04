@@ -1,0 +1,3 @@
+-- Modify the existing table, for example, add a constraint
+-- ALTER TABLE example_table
+-- ADD CONSTRAINT example_table_name_unique UNIQUE (name);
