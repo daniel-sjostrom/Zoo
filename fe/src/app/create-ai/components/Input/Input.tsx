@@ -1,12 +1,27 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
-import { copy } from "@/copy/en";
+import React, { useState, ChangeEvent, useEffect, useRef } from "react";
 
 import styles from "./Input.module.css";
 
-const Input: React.FC = () => {
+interface Props {
+    defaultText?: string;
+}
+
+const Input: React.FC<Props> = (props) => {
     const [input, setInput] = useState<string>("");
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        setInput(props.defaultText ?? "");
+    }, [props.defaultText]);
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+            inputRef.current.select();
+        }
+    }, []);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
@@ -15,9 +30,9 @@ const Input: React.FC = () => {
     return (
         <form className={styles.container}>
             <input
+                ref={inputRef}
                 className={styles.input}
                 type="text"
-                placeholder={copy.question_form_write_question}
                 value={input}
                 onChange={handleInputChange}
             />

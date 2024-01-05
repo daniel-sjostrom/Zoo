@@ -7,20 +7,27 @@ import { copy } from "@/copy/en";
 
 import styles from "./page.module.css";
 import Input from "./components/Input";
+import useAIStore from "../stores/useAIStore";
+import { useEffect } from "react";
 
 const CreateAIPage = () => {
+    const getAIStore = useAIStore((state) => state.getAIStore);
+    const AIStoreData = useAIStore((state) => state.data);
+
+    useEffect(() => {
+        getAIStore();
+    }, [getAIStore]);
+
     return (
         <main className={styles.main}>
             <Box>
                 <h2>{copy.create_ai_form_title}</h2>
                 <div className={commonStyles.space4} />
-                <div className={styles.buttonContainer}>
-                    <Input />
-                    <div className={commonStyles.space_horizontal4} />
-                    <Button onClick={() => {}}>
-                        {copy.create_ai_form_next_button}
-                    </Button>
-                </div>
+                <Input defaultText={AIStoreData?.name_suggestion} />
+                <p>{AIStoreData?.available_models}</p>
+                <Button onClick={() => {}}>
+                    {copy.create_ai_form_next_button}
+                </Button>
             </Box>
         </main>
     );

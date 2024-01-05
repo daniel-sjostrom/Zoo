@@ -13,7 +13,7 @@ interface State {
     getAIStore: () => Promise<void>;
 }
 
-const useCreateAIStore = create<State>((set) => ({
+const useAIStore = create<State>((set) => ({
     data: undefined,
     isLoading: false,
     error: null,
@@ -32,4 +32,4 @@ const useCreateAIStore = create<State>((set) => ({
     },
 }));
 
-export default useCreateAIStore;
+export default useAIStore;
