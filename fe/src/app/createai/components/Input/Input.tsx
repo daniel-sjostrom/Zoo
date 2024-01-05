@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, ChangeEvent } from "react";
-import styles from "./Question.module.css";
 import { copy } from "@/copy/en";
 
-const Question: React.FC = () => {
+import styles from "./Input.module.css";
+
+const Input: React.FC = () => {
     const [input, setInput] = useState<string>("");
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,4 +25,4 @@ const Question: React.FC = () => {
     );
 };
 
-export default Question;
+export default Input;

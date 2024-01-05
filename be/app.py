@@ -15,29 +15,4 @@ async def read_root():
     return {"hello": "Welcome to the super duper backend API 🦸‍♀️"}
 
 
-async def save_post(username: str):
-    conn = await asyncpg.connect(SQL_DATABASE_URL)
-    try:
-        await conn.execute(
-            "INSERT INTO super_duper_table (username) VALUES ($1)", username
-        )
-    finally:
-        await conn.close()
-
-
-class EasyPost(BaseModel):
-    username: str
-
-
-@app.post("/post")
-async def easy_post(request: EasyPost = Body(...)):
-    try:
-        print(request.username)
-        await save_post(request.username)
-
-        return {"message": "Response saved successfully"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
-
-
-app.include_router(create_ai_router, prefix="/api")
+app.include_router(create_ai_router, prefix="/api/v1")
