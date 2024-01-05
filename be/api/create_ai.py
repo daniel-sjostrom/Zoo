@@ -1,3 +1,5 @@
+from typing import Optional
+import uuid
 import asyncpg
 from pydantic import BaseModel
 from fastapi import APIRouter
@@ -10,12 +12,12 @@ router = APIRouter()
 SQL_DATABASE_URL = get_database_url()
 
 
-async def create_ai(id: str, user_id: str, name: str, model: str):
+async def create_ai(ai_id: str, user_id: str, name: str, model: str):
     conn = await asyncpg.connect(SQL_DATABASE_URL)
     try:
         await conn.execute(
             "INSERT INTO ai_settings (id, user_id, name, model) VALUES ($1, $2, $3, $4)",
-            id,
+            ai_id,
             user_id,
             name,
             model,
@@ -25,24 +27,28 @@ async def create_ai(id: str, user_id: str, name: str, model: str):
 
 
 class CreateAISettingsInput(BaseModel):
-    user_id: str
+    user_id: Optional[str] = None
     name: str
     model: str
 
 
-@router.post("/create-ai-settings")
-async def create_ai_settings(create_ai_settings_input: CreateAISettingsInput):
-    id = "".join(
-        random.choice(string.ascii_lowercase + string.digits) for _ in range(6)
+@router.post("/ai-settings")
+async def post_ai_settings(create_ai_settings_input: CreateAISettingsInput):
+    ai_id = str(uuid.uuid4())
+    user_id = (
+        str(uuid.uuid4())
+        if create_ai_settings_input.user_id == None
+        else create_ai_settings_input.user_id
     )
 
     await create_ai(
-        id,
-        create_ai_settings_input.user_id,
+        ai_id,
+        user_id,
         create_ai_settings_input.name,
         create_ai_settings_input.model,
     )
-    return {"response": {"ai_id": id}}
+
+    return {"response": {"ai_id": ai_id}}
 
 
 async def select_ai_settings(id: str, user_id: str):
@@ -61,8 +67,8 @@ class ReadAISettingsInput(BaseModel):
     user_id: str
 
 
-@router.get("/read-ai-settings")
-async def read_ai_settings(read_ai_settings_input: ReadAISettingsInput):
+@router.get("/ai-settings")
+async def get_ai_settings(read_ai_settings_input: ReadAISettingsInput):
     ai_settings = await select_ai_settings(
         read_ai_settings_input.id, read_ai_settings_input.user_id
     )
