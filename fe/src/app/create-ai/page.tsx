@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Box from "@/components/Box";
 import Button from "@/components/Button";
 import commonStyles from "@/styles/common.module.css";
@@ -8,7 +9,6 @@ import { copy } from "@/copy/en";
 import styles from "./page.module.css";
 import Input from "./components/Input";
 import useAIStore from "../stores/useAIStore";
-import { useEffect } from "react";
 
 const CreateAIPage = () => {
     const getAIStore = useAIStore((state) => state.getAIStore);
