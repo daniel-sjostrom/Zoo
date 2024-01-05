@@ -3,8 +3,6 @@ import uuid
 import asyncpg
 from pydantic import BaseModel
 from fastapi import APIRouter
-import random
-import string
 
 from settings import get_database_url
 
@@ -48,7 +46,7 @@ async def post_ai_settings(create_ai_settings_input: CreateAISettingsInput):
         create_ai_settings_input.model,
     )
 
-    return {"response": {"ai_id": ai_id}}
+    return {"ai_id": ai_id}
 
 
 async def select_ai_settings(id: str, user_id: str):
@@ -73,4 +71,4 @@ async def get_ai_settings(read_ai_settings_input: ReadAISettingsInput):
         read_ai_settings_input.id, read_ai_settings_input.user_id
     )
 
-    return {"response": {"ai_settings": ai_settings}}
+    return {"ai_settings": ai_settings}

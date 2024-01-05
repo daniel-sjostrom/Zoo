@@ -64,8 +64,6 @@ def generate_random_animal():
 @router.get("/ai-store")
 async def get_ai_store():
     return {
-        "response": {
-            "name_suggestion": generate_random_animal(),
-            "available_models": AVAILABLE_MODELS,
-        }
+        "name_suggestion": generate_random_animal(),
+        "available_models": AVAILABLE_MODELS,
     }

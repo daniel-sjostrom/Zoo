@@ -12,13 +12,13 @@ const CreateAIPage = () => {
     return (
         <main className={styles.main}>
             <Box>
-                <h2>{copy.question_form_title}</h2>
+                <h2>{copy.create_ai_form_title}</h2>
                 <div className={commonStyles.space4} />
                 <div className={styles.buttonContainer}>
                     <Input />
                     <div className={commonStyles.space_horizontal4} />
                     <Button onClick={() => {}}>
-                        {copy.question_form_next_button}
+                        {copy.create_ai_form_next_button}
                     </Button>
                 </div>
             </Box>
