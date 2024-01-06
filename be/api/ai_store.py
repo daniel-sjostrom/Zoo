@@ -55,12 +55,12 @@ SWEDISH_ANIMALS = [
 AVAILABLE_MODELS = [
     {
         "name": "Mistral 7b",
-        "description": "The most popular 7b model.",
+        "description": "The best 7b model at the moment",
         "file_name": "mistral-7b-instruct-v0.1.Q4_K_M.gguf",
     },
     {
         "name": "Llama 2 7b",
-        "description": "Description of another item.",
+        "description": "The most popular 7b model",
         "file_name": "another-item-file-v1.0.XY_Z_A.gguf",
     },
 ]

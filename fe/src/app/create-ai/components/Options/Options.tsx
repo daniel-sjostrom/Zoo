@@ -11,11 +11,14 @@ interface OptionProps {
     onClick: (arg: AvailableModel) => void;
 }
 
-const Option: React.FC<OptionProps> = (props) => {
+export const Option: React.FC<OptionProps> = (props) => {
     const [isHovering, setIsHovering] = useState(false);
+    const [isSelected, setIsSelected] = useState(false);
 
     const onMouseOver = () => {
-        setIsHovering(true);
+        if (isSelected === false) {
+            setIsHovering(true);
+        }
     };
 
     const onMouseOut = () => {
@@ -23,6 +26,7 @@ const Option: React.FC<OptionProps> = (props) => {
     };
 
     const onClick = () => {
+        setIsSelected(true);
         props.onClick(props.option);
     };
 
@@ -32,29 +36,35 @@ const Option: React.FC<OptionProps> = (props) => {
                 onMouseOver={onMouseOver}
                 onMouseOut={onMouseOut}
                 onClick={onClick}
-                className={styles.button}
+                className={`${styles.optionCard} ${
+                    isSelected && styles.isSelected
+                } ${isHovering && styles.hover}`}
             >
-                <div className={styles.optionContent}>
-                    <div className={styles.optionText}>
-                        <h3>{props.option.name}</h3>
-                        <p>{props.option.description}</p>
-                    </div>
+                <div className={styles.optionText}>
+                    <h3 className={`${isSelected && styles.isSelectedh3}`}>
+                        {props.option.name}
+                    </h3>
+                    <div className={commonStyles.space1} />
+                    <p className={`${isSelected && styles.isSelectedp}`}>
+                        {props.option.description}
+                    </p>
                 </div>
+                <h2>{isSelected ? "✅" : "✨"}</h2>
             </button>
-            {isHovering && <div className={styles.buttonHoverShadow} />}
+            {isHovering && <div className={styles.optionCardHoverShadow} />}
         </div>
     );
 };
 
 interface Props {
     options: AvailableModel[] | undefined;
-    onSelect: (selectedValue: AvailableModel) => void;
+    onClick: (selectedValue: AvailableModel) => void;
 }
 
 const Options: React.FC<Props> = (props) => {
     return props.options?.map((option, index) => (
         <div key={index}>
-            <Option onClick={props.onSelect} option={option} />
+            <Option onClick={props.onClick} option={option} />
             <div className={commonStyles.space2} />
         </div>
     ));
