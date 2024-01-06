@@ -30,29 +30,40 @@ ADJECTIVES = [
 ]
 
 SWEDISH_ANIMALS = [
-    "Moose",
+    "Moose 🫎",
     "Reindeer",
-    "Hare",
-    "Beaver",
-    "Brown Bear",
-    "Ladybug",
-    "Fox",
-    "Wolf",
-    "Bison",
-    "Boar",
+    "Hare 🐇",
+    "Beaver 🦫",
+    "Brown Bear 🐻",
+    "Ladybug 🐞",
+    "Fox 🦊",
+    "Wolf 🐺",
+    "Bison 🦬",
+    "Boar 🐗",
     "Porcupine",
-    "Eagle",
+    "Eagle 🦅",
     "Osprey",
-    "Swan",
+    "Swan 🦢",
     "Mink",
-    "Polar Bear",
-    "Seal",
-    "Salmon",
+    "Polar Bear 🐻‍❄️",
+    "Seal 🦭",
+    "Salmon 🍣",
     "Lynx",
     "Osprey",
 ]
 
-AVAILABLE_MODELS = ["mistral-7b-instruct-v0.1.Q4_K_M.gguf"]
+AVAILABLE_MODELS = [
+    {
+        "name": "Mistral 7b",
+        "description": "The most popular 7b model.",
+        "file_name": "mistral-7b-instruct-v0.1.Q4_K_M.gguf",
+    },
+    {
+        "name": "Llama 2 7b",
+        "description": "Description of another item.",
+        "file_name": "another-item-file-v1.0.XY_Z_A.gguf",
+    },
+]
 
 
 def generate_random_animal():

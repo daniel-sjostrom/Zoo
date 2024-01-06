@@ -1,9 +1,15 @@
 import { create } from "zustand";
 import axios, { AxiosError } from "axios";
 
+export type AvailableModel = {
+    name: string;
+    description: string;
+    file_name: string;
+};
+
 type data = {
     name_suggestion: string;
-    available_models: string[];
+    available_models: AvailableModel[];
 };
 
 interface State {

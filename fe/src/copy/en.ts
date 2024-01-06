@@ -1,5 +1,6 @@
 export const copy = {
     create_ai_form_title: "Create your AI",
-    create_ai_form_next_button: "Create",
+    create_ai_form_next_button: "Next",
+    create_ai_form_create_button: "Create",
     home_start_here_button: "Start here",
 };

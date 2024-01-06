@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, ChangeEvent, useEffect, useRef } from "react";
+import commonStyles from "@/styles/common.module.css";
 
 import styles from "./Input.module.css";
 
@@ -28,15 +29,13 @@ const Input: React.FC<Props> = (props) => {
     };
 
     return (
-        <form className={styles.container}>
-            <input
-                ref={inputRef}
-                className={styles.input}
-                type="text"
-                value={input}
-                onChange={handleInputChange}
-            />
-        </form>
+        <input
+            ref={inputRef}
+            className={styles.input}
+            type="text"
+            value={input}
+            onChange={handleInputChange}
+        />
     );
 };
 
