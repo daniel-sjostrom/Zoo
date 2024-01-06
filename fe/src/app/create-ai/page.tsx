@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import Box from "@/components/Box";
 import Button from "@/components/Button";
@@ -56,12 +56,12 @@ const CreateAIPage = () => {
                 </div>
                 {progress > 0 && (
                     <>
-                        <div className={commonStyles.space4} />
+                        <div className={commonStyles.space6} />
                         <h2>{copy.create_ai_form_name}</h2>
                         <div className={commonStyles.space2} />
                         <form className={styles.form}>
                             <Input defaultText={AIStoreData?.name_suggestion} />
-                            <div className={commonStyles.space_horizontal4} />
+                            <div className={commonStyles.space4} />
                             <Button onClick={onNext}>
                                 {copy.create_ai_form_next_button}
                             </Button>

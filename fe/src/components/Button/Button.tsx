@@ -9,30 +9,43 @@ interface Props {
 }
 
 const Button: React.FC<Props> = (props) => {
-    const [isHovering, setIsHovering] = useState(false);
-    const onMouseOver = () => {
-        setIsHovering(true);
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleHover = () => {
+        setIsHovered(true);
     };
 
-    const onMouseOut = () => {
-        setIsHovering(false);
+    const handleLeave = () => {
+        setIsHovered(false);
     };
 
     return (
         <div>
             <button
-                onMouseOver={onMouseOver}
-                onMouseOut={onMouseOut}
                 onClick={props.onClick}
-                className={`${styles.button} ${
-                    props.secondaryButton && styles.secondaryButton
-                }`}
+                className={`${styles.button} ${isHovered && styles.hovered}`}
+                onMouseEnter={handleHover}
+                onMouseLeave={handleLeave}
             >
                 {props.children}
             </button>
-            {isHovering && <div className={styles.buttonHoverShadow} />}
         </div>
     );
+    // return (
+    //     <div className={styles.main}>
+    //         <div className={styles.container}>
+    //             <button
+    //                 onClick={props.onClick}
+    //                 className={`${styles.button} ${
+    //                     props.secondaryButton && styles.secondaryButton
+    //                 }`}
+    //             >
+    //                 {props.children}
+    //             </button>
+    //             <div className={styles.hoverShadow} />
+    //         </div>
+    //     </div>
+    // );
 };
 
 export default Button;

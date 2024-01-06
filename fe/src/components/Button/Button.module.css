@@ -2,9 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 0;
-    padding: 10px 20px;
-    border-radius: 10px;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
     font-weight: 600;
     cursor: pointer;
     border: 3px solid;
@@ -15,28 +14,7 @@
     z-index: 1;
 }
 
-.button:hover {
-    position: relative;
-    bottom: 3px;
+.button.hovered {
+    transform: translateY(-2px);
 }
-
-.buttonHoverShadow {
-    position: relative;
-    background: var(--button-color-shadow);
-    height: 10px;
-    bottom: 10px;
-    margin-bottom: -14px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border: 2px solid;
-    border-color: var(--button-color-border);
-}
-
-.secondaryButton {
-    border-color: var(--button-color-border);
-}
-
-.loading {
-    border-color: var(--button-color-border);
-    color: var(--button-color-border);
-}
+  
