@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, ChangeEvent, useEffect, useRef } from "react";
+import Shadow from "@/components/Shadow";
 
 import styles from "./Input.module.css";
 
@@ -30,13 +31,15 @@ const Input: React.FC<Props> = (props) => {
     };
 
     return (
-        <input
-            ref={inputRef}
-            className={styles.input}
-            type="text"
-            value={input}
-            onChange={handleInputChange}
-        />
+        <Shadow>
+            <input
+                ref={inputRef}
+                className={styles.input}
+                type="text"
+                value={input}
+                onChange={handleInputChange}
+            />
+        </Shadow>
     );
 };
 

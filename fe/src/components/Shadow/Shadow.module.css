@@ -1,0 +1,7 @@
+.shadow {
+    display: flex;
+    box-shadow: -5px 5px 40px 5px rgba(0, 0, 0, 0.33);
+    -webkit-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.33);
+    -moz-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.33);
+
+}
