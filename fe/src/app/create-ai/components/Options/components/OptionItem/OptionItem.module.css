@@ -12,6 +12,9 @@
     border-color: var(--button-color-border);
     color: var(--text-color);
     position: relative;
+    box-shadow: -5px 5px 40px 5px rgba(0, 0, 0, 0.33);
+    -webkit-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.33);
+    -moz-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.33);
     z-index: 1;
 }
 

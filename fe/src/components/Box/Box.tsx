@@ -1,4 +1,3 @@
-import Shadow from "../Shadow";
 import styles from "./Box.module.css";
 
 interface Props {
@@ -6,11 +5,7 @@ interface Props {
 }
 
 const Box: React.FC<Props> = (props) => {
-    return (
-        <Shadow>
-            <div className={styles.container}>{props.children}</div>
-        </Shadow>
-    );
+    return <div className={styles.container}>{props.children}</div>;
 };
 
 export default Box;

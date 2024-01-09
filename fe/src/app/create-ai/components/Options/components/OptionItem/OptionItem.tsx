@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import commonStyles from "@/styles/common.module.css";
 import { AvailableModel } from "@/app/stores/useAIStore";
-import Shadow from "@/components/Shadow";
 
 import styles from "./OptionItem.module.css";
 
@@ -30,7 +29,7 @@ export const OptionItem: React.FC<Props> = (props) => {
     };
 
     return (
-        <Shadow>
+        <div>
             <button
                 onMouseOver={onMouseOver}
                 onMouseOut={onMouseOut}
@@ -53,7 +52,7 @@ export const OptionItem: React.FC<Props> = (props) => {
                 <h2>{props.isSelected ? "✅" : "✨"}</h2>
             </button>
             {isHovering && <div className={styles.hoverShadow} />}
-        </Shadow>
+        </div>
     );
 };
 
