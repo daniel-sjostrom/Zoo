@@ -29,27 +29,27 @@ ADJECTIVES = [
     "Majestic",
 ]
 
-SWEDISH_ANIMALS = [
-    "Moose 🫎",
-    "Reindeer",
-    "Hare 🐇",
-    "Beaver 🦫",
-    "Brown Bear 🐻",
-    "Ladybug 🐞",
-    "Fox 🦊",
-    "Wolf 🐺",
-    "Bison 🦬",
-    "Boar 🐗",
-    "Porcupine",
-    "Eagle 🦅",
-    "Osprey",
-    "Swan 🦢",
-    "Mink",
-    "Polar Bear 🐻‍❄️",
-    "Seal 🦭",
-    "Salmon 🍣",
-    "Lynx",
-    "Osprey",
+ROBOTS = [
+    "Android",
+    "Cyborg",
+    "Machine",
+    "Droid",
+    "Synth",
+    "Bot",
+    "Automat",
+    "Mecha",
+    "Roboticist",
+    "AI Agent",
+    "Neural Network",
+    "Humanoid",
+    "Circuitry",
+    "Automata",
+    "Technobot",
+    "Cybernetic",
+    "Algorithm",
+    "Virtual Assistant",
+    "Drone",
+    "Automatronic",
 ]
 
 AVAILABLE_MODELS = [
@@ -66,15 +66,15 @@ AVAILABLE_MODELS = [
 ]
 
 
-def generate_random_animal():
+def generate_random_robot():
     random_adjective = random.choice(ADJECTIVES)
-    random_animal = random.choice(SWEDISH_ANIMALS)
-    return f"{random_adjective} {random_animal}"
+    random_robot = random.choice(ROBOTS)
+    return f"{random_adjective} {random_robot}"
 
 
 @router.get("/ai-store")
 async def get_ai_store():
     return {
-        "name_suggestion": generate_random_animal(),
+        "name_suggestion": generate_random_robot(),
         "available_models": AVAILABLE_MODELS,
     }

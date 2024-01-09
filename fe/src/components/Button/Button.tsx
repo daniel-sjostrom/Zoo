@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./Button.module.css";
 
 interface Props {
-    secondaryButton?: boolean;
+    disabled?: boolean;
     children: string;
     onClick: () => void;
 }
@@ -23,29 +23,17 @@ const Button: React.FC<Props> = (props) => {
         <div>
             <button
                 onClick={props.onClick}
-                className={`${styles.button} ${isHovered && styles.hovered}`}
+                className={`${styles.button} ${isHovered && styles.hovered} ${
+                    props.disabled && styles.disabled
+                }`}
                 onMouseEnter={handleHover}
                 onMouseLeave={handleLeave}
+                disabled={props.disabled}
             >
                 {props.children}
             </button>
         </div>
     );
-    // return (
-    //     <div className={styles.main}>
-    //         <div className={styles.container}>
-    //             <button
-    //                 onClick={props.onClick}
-    //                 className={`${styles.button} ${
-    //                     props.secondaryButton && styles.secondaryButton
-    //                 }`}
-    //             >
-    //                 {props.children}
-    //             </button>
-    //             <div className={styles.hoverShadow} />
-    //         </div>
-    //     </div>
-    // );
 };
 
 export default Button;

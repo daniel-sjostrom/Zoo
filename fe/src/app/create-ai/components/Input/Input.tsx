@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, ChangeEvent, useEffect, useRef } from "react";
-import commonStyles from "@/styles/common.module.css";
 
 import styles from "./Input.module.css";
 
 interface Props {
     defaultText?: string;
+    onInput: (arg: string) => void;
 }
 
 const Input: React.FC<Props> = (props) => {
@@ -26,6 +26,7 @@ const Input: React.FC<Props> = (props) => {
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
+        props.onInput(e.target.value);
     };
 
     return (

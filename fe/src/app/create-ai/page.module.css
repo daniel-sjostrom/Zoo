@@ -10,7 +10,3 @@
   width: 100%;
   flex-direction: column;
 }
-
-.modelIsSelected {
-  color: var(--text-color-200)
-}

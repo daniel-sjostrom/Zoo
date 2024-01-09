@@ -17,4 +17,10 @@
 .button.hovered {
     transform: translateY(-2px);
 }
+
+.button.disabled {
+    border-color: var(--button-color-border);
+    color: var(--text-color-300);
+    cursor: default;
+}
   

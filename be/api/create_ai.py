@@ -46,6 +46,7 @@ async def post_ai_settings(create_ai_settings_input: CreateAISettingsInput):
         create_ai_settings_input.model,
     )
 
+    # TODO add a user ID in the response and save it on async storage in the browser
     return {"ai_id": ai_id}
 
 
