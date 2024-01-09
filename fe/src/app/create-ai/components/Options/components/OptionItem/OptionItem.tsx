@@ -3,19 +3,19 @@ import { useState } from "react";
 import commonStyles from "@/styles/common.module.css";
 import { AvailableModel } from "@/app/stores/useAIStore";
 
-import styles from "./Option.module.css";
+import styles from "./OptionItem.module.css";
 
 interface Props {
     option: AvailableModel;
-    onClick: (arg: AvailableModel) => void;
+    isSelected: boolean;
+    onSelect: (arg: AvailableModel) => void;
 }
 
-export const Option: React.FC<Props> = (props) => {
+export const OptionItem: React.FC<Props> = (props) => {
     const [isHovering, setIsHovering] = useState(false);
-    const [isSelected, setIsSelected] = useState(false);
 
     const onMouseOver = () => {
-        if (isSelected === false) {
+        if (props.isSelected === false) {
             setIsHovering(true);
         }
     };
@@ -25,8 +25,7 @@ export const Option: React.FC<Props> = (props) => {
     };
 
     const onClick = () => {
-        props.onClick(props.option);
-        setIsSelected(true);
+        props.onSelect(props.option);
     };
 
     return (
@@ -35,24 +34,26 @@ export const Option: React.FC<Props> = (props) => {
                 onMouseOver={onMouseOver}
                 onMouseOut={onMouseOut}
                 onClick={onClick}
-                className={`${styles.card} ${isSelected && styles.isSelected} ${
-                    isHovering && styles.hover
-                }`}
+                className={`${styles.card} ${
+                    props.isSelected && styles.isSelected
+                } ${isHovering && styles.hover}`}
             >
                 <div className={styles.textContainer}>
-                    <h3 className={`${isSelected && styles.isSelectedh3}`}>
+                    <h3
+                        className={`${props.isSelected && styles.isSelectedh3}`}
+                    >
                         {props.option.name}
                     </h3>
                     <div className={commonStyles.space1} />
-                    <p className={`${isSelected && styles.isSelectedp}`}>
+                    <p className={`${props.isSelected && styles.isSelectedp}`}>
                         {props.option.description}
                     </p>
                 </div>
-                <h2>{isSelected ? "✅" : "✨"}</h2>
+                <h2>{props.isSelected ? "✅" : "✨"}</h2>
             </button>
             {isHovering && <div className={styles.hoverShadow} />}
         </div>
     );
 };
 
-export default Option;
+export default OptionItem;

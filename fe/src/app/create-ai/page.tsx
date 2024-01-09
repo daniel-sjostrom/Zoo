@@ -11,12 +11,13 @@ import { copy } from "@/copy/en";
 import styles from "./page.module.css";
 import Input from "./components/Input";
 import Options from "./components/Options";
-import useAIStore from "../stores/useAIStore";
+import useAIStore, { AvailableModel } from "../stores/useAIStore";
 
 const CreateAIPage = () => {
     const router = useRouter();
     const getAIStore = useAIStore((state) => state.getAIStore);
     const AIStoreData = useAIStore((state) => state.data);
+    const [model, setModel] = useState<AvailableModel | undefined>(undefined);
     const [name, setName] = useState<string | undefined>(undefined);
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const CreateAIPage = () => {
                     <div className={commonStyles.space2} />
                     <Options
                         options={AIStoreData?.available_models}
-                        onClick={() => {}}
+                        onSelect={setModel}
                     />
                 </div>
                 <div className={commonStyles.space6} />
@@ -55,7 +56,7 @@ const CreateAIPage = () => {
                         onInput={onNameChange}
                     />
                     <div className={commonStyles.space6} />
-                    <Button disabled onClick={onNext}>
+                    <Button disabled={!model || !name} onClick={onNext}>
                         {copy.create_ai_form_next_button}
                     </Button>
                 </form>

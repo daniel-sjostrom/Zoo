@@ -1,23 +1,39 @@
-"use client";
-
-import React from "react";
+// Options.tsx
+import React, { useState } from "react";
 import commonStyles from "@/styles/common.module.css";
 import { AvailableModel } from "@/app/stores/useAIStore";
 
-import Option from "./components/Option";
+import OptionItem from "./components/OptionItem";
 
 interface Props {
     options: AvailableModel[] | undefined;
-    onClick: (selectedValue: AvailableModel) => void;
+    onSelect: (arg: AvailableModel) => void;
 }
 
 const Options: React.FC<Props> = (props) => {
-    return props.options?.map((option, index) => (
-        <div key={index}>
-            <Option onClick={props.onClick} option={option} />
-            <div className={commonStyles.space2} />
-        </div>
-    ));
+    const [selectedOption, setSelectedOption] = useState<AvailableModel | null>(
+        null
+    );
+
+    const handleOptionClick = (selectedValue: AvailableModel) => {
+        setSelectedOption(selectedValue);
+        props.onSelect(selectedValue);
+    };
+
+    return (
+        <>
+            {props.options?.map((option, index) => (
+                <div key={index}>
+                    <OptionItem
+                        onSelect={handleOptionClick}
+                        option={option}
+                        isSelected={selectedOption === option}
+                    />
+                    <div className={commonStyles.space2} />
+                </div>
+            ))}
+        </>
+    );
 };
 
 export default Options;
