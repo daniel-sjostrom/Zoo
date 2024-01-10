@@ -36,6 +36,8 @@ const CreateAIPage = () => {
 
     const onNext = () => {
         if (name && model) {
+            // TODO add routing to chat or similar url /chat/{ai_id}
+            // TODO save the user id to the client
             postCreateAI({ name, model: model.file_name });
         }
     };
