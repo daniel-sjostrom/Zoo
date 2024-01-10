@@ -36,8 +36,6 @@ const CreateAIPage = () => {
 
     const onNext = () => {
         if (name && model) {
-            console.log(name);
-            console.log(model);
             postCreateAI({ name, model: model.file_name });
         }
     };
@@ -56,16 +54,14 @@ const CreateAIPage = () => {
                 <div className={commonStyles.space6} />
                 <h2>{copy.create_ai_form_name}</h2>
                 <div className={commonStyles.space2} />
-                <form className={styles.form}>
-                    <Input
-                        defaultText={AIStoreData?.name_suggestion}
-                        onInput={onNameChange}
-                    />
-                    <div className={commonStyles.space6} />
-                    <Button disabled={!model || !name} onClick={onNext}>
-                        {copy.create_ai_form_next_button}
-                    </Button>
-                </form>
+                <Input
+                    defaultText={AIStoreData?.name_suggestion}
+                    onInput={onNameChange}
+                />
+                <div className={commonStyles.space6} />
+                <Button disabled={!model || !name} onClick={onNext}>
+                    {copy.create_ai_form_next_button}
+                </Button>
             </Box>
         </main>
     );
