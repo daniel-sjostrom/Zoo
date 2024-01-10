@@ -32,12 +32,17 @@ class CreateAISettingsInput(BaseModel):
 
 @router.post("/ai-settings")
 async def post_ai_settings(create_ai_settings_input: CreateAISettingsInput):
+    print(create_ai_settings_input.name)
+    print(create_ai_settings_input.model)
     ai_id = str(uuid.uuid4())
     user_id = (
         str(uuid.uuid4())
         if create_ai_settings_input.user_id == None
         else create_ai_settings_input.user_id
     )
+
+    print(ai_id)
+    print(user_id)
 
     await create_ai(
         ai_id,
@@ -46,8 +51,7 @@ async def post_ai_settings(create_ai_settings_input: CreateAISettingsInput):
         create_ai_settings_input.model,
     )
 
-    # TODO add a user ID in the response and save it on async storage in the browser
-    return {"ai_id": ai_id}
+    return {"ai_id": ai_id, "user_id": user_id}
 
 
 async def select_ai_settings(id: str, user_id: str):

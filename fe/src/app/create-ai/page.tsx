@@ -12,11 +12,13 @@ import styles from "./page.module.css";
 import Input from "./components/Input";
 import Options from "./components/Options";
 import useAIStore, { AvailableModel } from "../stores/useAIStore";
+import useCreateAI from "../stores/useCreateAI";
 
 const CreateAIPage = () => {
     const router = useRouter();
     const getAIStore = useAIStore((state) => state.getAIStore);
     const AIStoreData = useAIStore((state) => state.data);
+    const postCreateAI = useCreateAI((state) => state.post);
     const [model, setModel] = useState<AvailableModel | undefined>(undefined);
     const [name, setName] = useState<string | undefined>(undefined);
 
@@ -33,7 +35,11 @@ const CreateAIPage = () => {
     };
 
     const onNext = () => {
-        router.push("/inference");
+        if (name && model) {
+            console.log(name);
+            console.log(model);
+            postCreateAI({ name, model: model.file_name });
+        }
     };
 
     return (
