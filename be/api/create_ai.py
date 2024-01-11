@@ -65,15 +65,13 @@ async def select_ai_settings(id: str, user_id: str):
         await conn.close()
 
 
+# TODO refactor so that the user_id is received in the header instead
 class ReadAISettingsInput(BaseModel):
-    id: str
+    ai_id: str
     user_id: str
 
 
 @router.get("/ai-settings")
-async def get_ai_settings(read_ai_settings_input: ReadAISettingsInput):
-    ai_settings = await select_ai_settings(
-        read_ai_settings_input.id, read_ai_settings_input.user_id
-    )
-
+async def get_ai_settings(ai_id: str, user_id: str):
+    ai_settings = await select_ai_settings(ai_id, user_id)
     return {"ai_settings": ai_settings}

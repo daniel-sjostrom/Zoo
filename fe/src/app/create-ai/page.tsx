@@ -10,10 +10,11 @@ import { copy } from "@/copy/en";
 import styles from "./page.module.css";
 import Input from "./components/Input";
 import Options from "./components/Options";
-import useAIStore, { AvailableModel } from "../stores/useAIStore";
 import useOnCreateAI from "./hooks/useOnCreateAI";
 
-const CreateAIPage = () => {
+import useAIStore, { AvailableModel } from "../stores/useAIStore";
+
+const CreateAI = () => {
     const getAIStore = useAIStore((state) => state.getAIStore);
     const AIStoreResponse = useAIStore((state) => state.data);
     const [model, setModel] = useState<AvailableModel | undefined>(undefined);
@@ -55,4 +56,4 @@ const CreateAIPage = () => {
     );
 };
 
-export default CreateAIPage;
+export default CreateAI;
