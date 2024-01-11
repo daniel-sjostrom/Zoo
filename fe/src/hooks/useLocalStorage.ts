@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 
-const getLocalStorageValue = (key: string) => {
-    if (localStorage.getItem(key)) {
+export enum LocalStorageKey {
+    UserID = "USER_ID",
+}
+
+const getLocalStorageValue = (key: LocalStorageKey) => {
+    if (!localStorage.getItem(key)) {
         return JSON.parse(localStorage.getItem(key)!);
     }
 };
 
-const useLocalStorage = <T>(key: string, initialValue: T) => {
+const useLocalStorage = <T>(key: LocalStorageKey, initialValue?: T) => {
     const storedValue = getLocalStorageValue(key) ?? initialValue;
     const [localValue, setLocalValue] = useState(storedValue);
 

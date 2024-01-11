@@ -2,16 +2,8 @@ import { create } from "zustand";
 import axios, { AxiosError } from "axios";
 
 type data = {
-    postAiSettings: {
-        user_id: string;
-        ai_id: string;
-    };
-    getAiSettings: {
-        user_id: string;
-        ai_id: string;
-        name: string;
-        model: string;
-    };
+    user_id: string;
+    ai_id: string;
 };
 
 interface State {
@@ -34,7 +26,6 @@ const useCreateAI = create<State>((set) => ({
         set({ isLoading: true, error: null });
 
         try {
-            console.log(data);
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_API}/ai-settings`,
                 {
@@ -43,8 +34,7 @@ const useCreateAI = create<State>((set) => ({
                     user_id: data?.user_id,
                 }
             );
-            console.log("am I here??");
-            console.log(response);
+
             set({ data: response.data, isLoading: false });
         } catch (error: AxiosError | any) {
             set({ error: error.message, isLoading: false });
