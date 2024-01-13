@@ -25,6 +25,8 @@ const useAIStore = create<State>((set) => ({
     error: null,
     getAIStore: async () => {
         set({ isLoading: true, error: null });
+        console.log("NEXT_PUBLIC_API");
+        console.log(process.env.NEXT_PUBLIC_API);
 
         try {
             const response = await axios.get(
