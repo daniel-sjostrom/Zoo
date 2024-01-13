@@ -5,7 +5,7 @@ export enum LocalStorageKey {
 }
 
 const getLocalStorageValue = (key: LocalStorageKey) => {
-    if (!localStorage.getItem(key)) {
+    if (typeof window !== "undefined" && !localStorage.getItem(key)) {
         return JSON.parse(localStorage.getItem(key)!);
     }
 };
