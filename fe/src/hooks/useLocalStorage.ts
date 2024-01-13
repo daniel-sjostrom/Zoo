@@ -1,30 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 export enum LocalStorageKey {
     UserID = "USER_ID",
 }
 
-const getLocalStorageValue = (key: LocalStorageKey) => {
-    if (typeof window !== "undefined" && !localStorage.getItem(key)) {
-        return JSON.parse(localStorage.getItem(key)!);
-    }
-};
+const useLocalStorage = <T>(
+    key: string,
+    initialValue?: T
+): [T, (arg: T) => void] => {
+    // Get stored value from local storage or use initial value
+    const storedValue: T = (() => {
+        try {
+            const item = localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue || null;
+        } catch (error) {
+            console.error("Error retrieving data from local storage:", error);
+            return initialValue || null;
+        }
+    })();
 
-const useLocalStorage = <T>(key: LocalStorageKey, initialValue?: T) => {
-    const storedValue = getLocalStorageValue(key) ?? initialValue;
-    const [localValue, setLocalValue] = useState(storedValue);
+    // State to hold the current value
+    const [value, setValue] = useState<T>(storedValue);
 
+    // Update local storage when the value changes
     useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(localValue));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            console.error("Error storing data in local storage:", error);
+        }
+    }, [key, value]);
 
-    const setValue = (newValue: T) => {
-        localStorage.setItem(key, JSON.stringify(newValue));
-        setLocalValue(newValue);
-    };
-
-    return [localValue, setValue];
+    return [value, setValue];
 };
 
 export default useLocalStorage;

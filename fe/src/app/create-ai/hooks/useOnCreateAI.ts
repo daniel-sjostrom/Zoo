@@ -16,7 +16,8 @@ const useOnCreateAI = (
 
     useEffect(() => {
         if (postData) {
-            setUserID(postData?.user_id);
+            // TODO Figure out why user id is undefined
+            setUserID(postData.user_id);
             router.push(`/chat/${postData?.ai_id}`);
         }
     }, [postData, router, setUserID]);

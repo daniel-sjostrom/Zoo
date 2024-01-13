@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios, { AxiosError } from "axios";
+import useLocalStorage, { LocalStorageKey } from "@/hooks/useLocalStorage";
 
 type postData = {
     user_id: string;
@@ -7,8 +8,8 @@ type postData = {
 };
 
 type getData = {
-    user_id: string;
     ai_id: string;
+    user_id: string;
     name: string;
     model: string;
 };
@@ -18,7 +19,7 @@ interface State {
     error: string | null;
     getData: getData | undefined;
     postData: postData | undefined;
-    get: () => Promise<void>;
+    get: (arg: { user_id: string; ai_id: string }) => Promise<void>;
     post: (arg: {
         name: string;
         model: string;
@@ -32,13 +33,20 @@ const useAISettings = create<State>((set) => ({
     isLoading: false,
     error: null,
 
-    get: async () => {
+    get: async (arg) => {
         set({ isLoading: true, error: null });
-
+        console.log(arg.user_id);
         try {
-            // TODO add user_id in the header and ai_id as a query parameter
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_API}/ai-settings`
+                `${process.env.NEXT_PUBLIC_API}/ai-settings`,
+                {
+                    headers: {
+                        user_id: arg.user_id,
+                    },
+                    params: {
+                        ai_id: arg.ai_id,
+                    },
+                }
             );
 
             set({ getData: response.data, isLoading: false });

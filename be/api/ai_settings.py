@@ -2,7 +2,7 @@ from typing import Optional
 import uuid
 import asyncpg
 from pydantic import BaseModel
-from fastapi import APIRouter
+from fastapi import APIRouter, Header
 
 from settings import get_database_url
 
@@ -60,13 +60,19 @@ async def select_ai_settings(id: str, user_id: str):
         await conn.close()
 
 
-# TODO refactor so that the user_id is received in the header instead
 class ReadAISettingsInput(BaseModel):
     ai_id: str
-    user_id: str
 
 
 @router.get("/ai-settings")
-async def get_ai_settings(ai_id: str, user_id: str):
+async def get_ai_settings(
+    ai_id: str, user_id: str = Header(..., convert_underscores=False)
+):
     ai_settings = await select_ai_settings(ai_id, user_id)
-    return {"ai_settings": ai_settings}
+
+    return {
+        "ai_id": ai_settings.get("id"),
+        "user_id": ai_settings.get("user_id"),
+        "name": ai_settings.get("name"),
+        "model": ai_settings.get("model"),
+    }
