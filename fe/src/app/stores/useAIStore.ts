@@ -7,33 +7,31 @@ export type AvailableModel = {
     file_name: string;
 };
 
-type data = {
+type getData = {
     name_suggestion: string;
     available_models: AvailableModel[];
 };
 
 interface State {
-    data: data | undefined;
+    getData: getData | undefined;
     isLoading: boolean;
     error: string | null;
-    getAIStore: () => Promise<void>;
+    get: () => Promise<void>;
 }
 
 const useAIStore = create<State>((set) => ({
-    data: undefined,
+    getData: undefined,
     isLoading: false,
     error: null,
-    getAIStore: async () => {
+    get: async () => {
         set({ isLoading: true, error: null });
-        console.log("NEXT_PUBLIC_API");
-        console.log(process.env.NEXT_PUBLIC_API);
 
         try {
             const response = await axios.get(
                 `${process.env.NEXT_PUBLIC_API}/ai-store`
             );
 
-            set({ data: response.data, isLoading: false });
+            set({ getData: response.data, isLoading: false });
         } catch (error: AxiosError | any) {
             set({ error: error.message, isLoading: false });
         }

@@ -15,8 +15,8 @@ import useOnCreateAI from "./hooks/useOnCreateAI";
 import useAIStore, { AvailableModel } from "../stores/useAIStore";
 
 const CreateAI = () => {
-    const getAIStore = useAIStore((state) => state.getAIStore);
-    const AIStoreResponse = useAIStore((state) => state.data);
+    const getAIStore = useAIStore((state) => state.get);
+    const AIStoreGetData = useAIStore((state) => state.getData);
     const [model, setModel] = useState<AvailableModel | undefined>(undefined);
     const [name, setName] = useState<string | undefined>(undefined);
     const onCreateAI = useOnCreateAI(name, model);
@@ -26,8 +26,8 @@ const CreateAI = () => {
     }, [getAIStore]);
 
     useEffect(() => {
-        setName(AIStoreResponse?.name_suggestion);
-    }, [AIStoreResponse?.name_suggestion]);
+        setName(AIStoreGetData?.name_suggestion);
+    }, [AIStoreGetData?.name_suggestion]);
 
     return (
         <main className={styles.main}>
@@ -36,7 +36,7 @@ const CreateAI = () => {
                     <h2>{copy.create_ai_form_select_model}</h2>
                     <div className={commonStyles.space2} />
                     <Options
-                        options={AIStoreResponse?.available_models}
+                        options={AIStoreGetData?.available_models}
                         onSelect={setModel}
                     />
                 </div>
@@ -44,7 +44,7 @@ const CreateAI = () => {
                 <h2>{copy.create_ai_form_name}</h2>
                 <div className={commonStyles.space2} />
                 <Input
-                    defaultText={AIStoreResponse?.name_suggestion}
+                    defaultText={AIStoreGetData?.name_suggestion}
                     onInput={setName}
                 />
                 <div className={commonStyles.space6} />

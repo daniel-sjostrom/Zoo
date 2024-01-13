@@ -2,8 +2,8 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import { AvailableModel } from "@/app/stores/useAIStore";
-import useCreateAI from "@/app/stores/useCreateAI";
 import useLocalStorage, { LocalStorageKey } from "@/hooks/useLocalStorage";
+import useAISettings from "@/app/stores/useAISettings";
 
 const useOnCreateAI = (
     name: string | undefined,
@@ -11,19 +11,19 @@ const useOnCreateAI = (
 ) => {
     const router = useRouter();
     const [_, setUserID] = useLocalStorage(LocalStorageKey.UserID);
-    const createAIResponse = useCreateAI((state) => state.data);
-    const postCreateAI = useCreateAI((state) => state.post);
+    const postData = useAISettings((state) => state.postData);
+    const postAISettings = useAISettings((state) => state.post);
 
     useEffect(() => {
-        if (createAIResponse) {
-            setUserID(createAIResponse?.user_id);
-            router.push(`/chat/${createAIResponse?.ai_id}`);
+        if (postData) {
+            setUserID(postData?.user_id);
+            router.push(`/chat/${postData?.ai_id}`);
         }
-    }, [createAIResponse, router, setUserID]);
+    }, [postData, router, setUserID]);
 
     const onCreateAI = async () => {
         if (name && model) {
-            await postCreateAI({ name, model: model.file_name });
+            await postAISettings({ name, model: model.file_name });
         }
     };
 

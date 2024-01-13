@@ -1,16 +1,25 @@
 import { create } from "zustand";
 import axios, { AxiosError } from "axios";
 
-type data = {
+type postData = {
     user_id: string;
     ai_id: string;
 };
 
+type getData = {
+    user_id: string;
+    ai_id: string;
+    name: string;
+    model: string;
+};
+
 interface State {
-    data: data | undefined;
     isLoading: boolean;
     error: string | null;
-    get: (arg: {
+    getData: getData | undefined;
+    postData: postData | undefined;
+    get: () => Promise<void>;
+    post: (arg: {
         name: string;
         model: string;
         user_id?: string;
@@ -18,11 +27,12 @@ interface State {
 }
 
 const useAISettings = create<State>((set) => ({
-    data: undefined,
+    getData: undefined,
+    postData: undefined,
     isLoading: false,
     error: null,
 
-    get: async (data) => {
+    get: async () => {
         set({ isLoading: true, error: null });
 
         try {
@@ -31,7 +41,25 @@ const useAISettings = create<State>((set) => ({
                 `${process.env.NEXT_PUBLIC_API}/ai-settings`
             );
 
-            set({ data: response.data, isLoading: false });
+            set({ getData: response.data, isLoading: false });
+        } catch (error: AxiosError | any) {
+            set({ error: error.message, isLoading: false });
+        }
+    },
+    post: async (data) => {
+        set({ isLoading: true, error: null });
+
+        try {
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_API}/ai-settings`,
+                {
+                    name: data.name,
+                    model: data.model,
+                    user_id: data?.user_id,
+                }
+            );
+
+            set({ postData: response.data, isLoading: false });
         } catch (error: AxiosError | any) {
             set({ error: error.message, isLoading: false });
         }
