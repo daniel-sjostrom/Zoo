@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from ctransformers import AutoModelForCausalLM
-import random
+from fastapi.responses import StreamingResponse
 
 from settings import get_database_url
 
@@ -21,3 +21,15 @@ async def chat():
     for text in llm("AI is going to", stream=True, max_new_tokens=100):
         print(text, end="", flush=True)
     return {"hello": "world"}
+
+
+@router.get("/chat-stream")
+async def chat():
+    sentence = "Hello, how are you?"
+
+    async def generate_words():
+        for word in llm(sentence, stream=True, max_new_tokens=50):
+            yield f"data: {word}\n\n"
+        yield "data: the: end\n\n"
+
+    return StreamingResponse(generate_words(), media_type="text/event-stream")

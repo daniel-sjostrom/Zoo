@@ -3,7 +3,3 @@ uvicorn
 asyncpg
 python-dotenv
 pydantic
-llama-cpp-python
-transformers
-torch
-sentence_transformers
