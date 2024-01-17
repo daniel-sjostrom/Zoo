@@ -15,7 +15,6 @@ const Chat: React.FC = () => {
     const AISettingsGetData = useAISettings((state) => state.getData);
     const { getData, get } = useChat();
 
-    // Call the get function when the component mounts
     useEffect(() => {
         get();
     }, [get]);
