@@ -1,28 +1,33 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import styles from "./page.module.css";
+
 import useLocalStorage, { LocalStorageKey } from "@/hooks/useLocalStorage";
 import useAISettings from "@/app/stores/useAISettings";
 import { useEffect } from "react";
 import useChat from "@/app/stores/useChat";
 
+import styles from "./page.module.css";
+
+// TODO Add the possbility to write any prompt
 const Chat: React.FC = () => {
     const params = useParams();
-    // TODO Figure out why user id is undefined
-    const [userId] = useLocalStorage<string>(LocalStorageKey.UserID);
-    const getAISettings = useAISettings((state) => state.get);
+    const [userID] = useLocalStorage<string>(LocalStorageKey.UserID);
     const AISettingsGetData = useAISettings((state) => state.getData);
-    const { getData, get } = useChat();
+    const { eventSourceData, eventSource } = useChat();
 
     useEffect(() => {
-        get();
-    }, [get]);
+        eventSource({
+            userID,
+            aiID: params.id as string,
+            prompt: "Hello, who are you?",
+        });
+    }, [eventSource, params.id, userID]);
 
     return (
         <main className={styles.main}>
             <h2>Chat 🤖</h2>
-            {getData && <p>Received: {getData.words}</p>}
+            {eventSourceData && <p>Received: {eventSourceData.response}</p>}
             <h2>{AISettingsGetData?.ai_id}</h2>
             <h2>{AISettingsGetData?.model}</h2>
             <h2>{AISettingsGetData?.name}</h2>

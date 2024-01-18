@@ -1,13 +1,14 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Header
 from ctransformers import AutoModelForCausalLM
 from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
+import asyncpg
 import asyncio
 
 from settings import get_database_url
 
 router = APIRouter()
 SQL_DATABASE_URL = get_database_url()
-THE_END = "6f147e8ca3d5eeb01779c95b463fd1a8452a73419f8060af84eda9781be51d0c"
 
 llm = AutoModelForCausalLM.from_pretrained(
     "TheBloke/Mistral-7B-Instruct-v0.1-GGUF",
@@ -17,23 +18,34 @@ llm = AutoModelForCausalLM.from_pretrained(
 )
 
 
-# 2: TODO Figure out how to choose the model stateless? db call that checks what is behind the id?
-@router.get("/chat")
-async def chat():
-    for text in llm("AI is going to", stream=True, max_new_tokens=100):
-        print(text, end="", flush=True)
-    return {"hello": "world"}
+async def select_ai_settings(id: str, user_id: str):
+    conn = await asyncpg.connect(SQL_DATABASE_URL)
+    try:
+        ai_settings = await conn.fetchrow(
+            "SELECT * FROM ai_settings WHERE id = $1 AND user_id = $2", id, user_id
+        )
+        return ai_settings
+    finally:
+        await conn.close()
 
 
-@router.get("/chat-stream")
-async def chat():
-    sentence = "Hello, how are you?"
+class ChatInput(BaseModel):
+    ai_id: str
+    prompt: str
+
+
+@router.post("/chat")
+async def chat(
+    chat_input: ChatInput, user_id: str = Header(..., convert_underscores=False)
+):
+    ai_settings = await select_ai_settings(chat_input.ai_id, user_id)
 
     async def generate_words():
-        for word in llm(sentence, stream=True, max_new_tokens=25):
+        for word in llm(chat_input.prompt, stream=True, max_new_tokens=25):
             yield f"data: {word}\n\n"
             await asyncio.sleep(0)
 
-        yield f"data: {THE_END}\n\n"
-
-    return StreamingResponse(generate_words(), media_type="text/event-stream")
+    if ai_settings.get("id") == chat_input.ai_id:
+        return StreamingResponse(generate_words(), media_type="text/event-stream")
+    else:
+        return {"error": "something went wrong"}

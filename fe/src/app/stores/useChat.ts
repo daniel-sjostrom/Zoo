@@ -1,49 +1,60 @@
 import { create } from "zustand";
 import { AxiosError } from "axios";
+import { fetchEventSource } from "@microsoft/fetch-event-source";
 
 const THE_END =
     "6f147e8ca3d5eeb01779c95b463fd1a8452a73419f8060af84eda9781be51d0c";
 
-type getData = {
-    words: string[];
+type eventSourceData = {
+    response: string[];
 };
 
 interface State {
-    getData: getData;
+    eventSourceData: eventSourceData;
     isLoading: boolean;
     error: string | null;
     close?: () => void;
-    get: () => Promise<void>;
+    eventSource: ({
+        aiID,
+        prompt,
+        userID,
+    }: {
+        aiID: string;
+        prompt: string;
+        userID: string;
+    }) => Promise<void>;
 }
 
 const useChat = create<State>((set) => ({
-    getData: { words: [] },
+    eventSourceData: { response: [] },
     isLoading: false,
     error: null,
-    get: async () => {
+    eventSource: async ({ aiID, prompt, userID }) => {
         set({ isLoading: true, error: null });
-
+        console.log(aiID, prompt, userID);
         try {
-            // TODO Refactor so that ai_id and user_id is sent in the request
-            const eventSource = new EventSource(
-                `${process.env.NEXT_PUBLIC_API}/chat-stream`
-            );
-
-            eventSource.onmessage = (event) => {
-                if (event.data === THE_END) {
-                    eventSource.close();
-                    return;
-                }
-
-                if (eventSource.readyState === eventSource.OPEN) {
+            await fetchEventSource(`${process.env.NEXT_PUBLIC_API}/chat`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    user_id: userID,
+                },
+                body: JSON.stringify({
+                    ai_id: aiID,
+                    prompt: prompt,
+                }),
+                onmessage(event) {
                     set((state) => ({
-                        getData: {
-                            words: [...state.getData.words, event.data],
+                        eventSourceData: {
+                            response: [
+                                ...state.eventSourceData.response,
+                                event.data,
+                            ],
                         },
                         isLoading: false,
                     }));
-                }
-            };
+                },
+            });
         } catch (error: AxiosError | any) {
             set({ error: error.message, isLoading: false });
         }
