@@ -5,17 +5,18 @@ import React, { useState, ChangeEvent, useEffect, useRef } from "react";
 import styles from "./Input.module.css";
 
 interface Props {
-    defaultText?: string;
-    onInput: (arg: string) => void;
+    value: string | undefined;
+    placeholder?: string;
+    onChange: (arg: string) => void;
 }
 
 const Input: React.FC<Props> = (props) => {
-    const [input, setInput] = useState<string>("");
+    const [_, setInput] = useState<string>("");
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
-        setInput(props.defaultText ?? "");
-    }, [props.defaultText]);
+        setInput(props.placeholder ?? "");
+    }, [props.placeholder]);
 
     useEffect(() => {
         if (inputRef.current) {
@@ -26,7 +27,7 @@ const Input: React.FC<Props> = (props) => {
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
-        props.onInput(e.target.value);
+        props.onChange(e.target.value);
     };
 
     return (
@@ -34,7 +35,7 @@ const Input: React.FC<Props> = (props) => {
             ref={inputRef}
             className={styles.input}
             type="text"
-            value={input}
+            value={props.value}
             onChange={handleInputChange}
         />
     );

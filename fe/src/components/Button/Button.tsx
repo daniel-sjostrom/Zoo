@@ -5,7 +5,7 @@ import styles from "./Button.module.css";
 interface Props {
     disabled?: boolean;
     children: string;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 const Button: React.FC<Props> = (props) => {

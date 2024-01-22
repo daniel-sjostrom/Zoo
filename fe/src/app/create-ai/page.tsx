@@ -6,9 +6,9 @@ import Box from "@/components/Box";
 import Button from "@/components/Button";
 import commonStyles from "@/styles/common.module.css";
 import { copy } from "@/copy/en";
+import Input from "@/components/Input";
 
 import styles from "./page.module.css";
-import Input from "./components/Input";
 import Options from "./components/Options";
 import useOnCreateAI from "./hooks/useOnCreateAI";
 
@@ -44,8 +44,9 @@ const CreateAI = () => {
                 <h2>{copy.create_ai_form_name}</h2>
                 <div className={commonStyles.space2} />
                 <Input
-                    defaultText={AIStoreGetData?.name_suggestion}
-                    onInput={setName}
+                    value={name}
+                    onChange={setName}
+                    placeholder={AIStoreGetData?.name_suggestion}
                 />
                 <div className={commonStyles.space6} />
                 <Button disabled={!model || !name} onClick={onCreateAI}>

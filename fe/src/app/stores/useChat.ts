@@ -7,6 +7,7 @@ const THE_END =
 
 type eventSourceData = {
     response: string[];
+    history: string[];
 };
 
 interface State {
@@ -26,7 +27,7 @@ interface State {
 }
 
 const useChat = create<State>((set) => ({
-    eventSourceData: { response: [] },
+    eventSourceData: { response: [], history: [] },
     isLoading: false,
     error: null,
     eventSource: async ({ aiID, prompt, userID }) => {
@@ -50,8 +51,20 @@ const useChat = create<State>((set) => ({
                                 ...state.eventSourceData.response,
                                 event.data,
                             ],
+                            history: [...state.eventSourceData.history],
                         },
                         isLoading: false,
+                    }));
+                },
+                onclose() {
+                    set((state) => ({
+                        eventSourceData: {
+                            history: [
+                                ...state.eventSourceData.history,
+                                state.eventSourceData.response.join(""),
+                            ],
+                            response: [],
+                        },
                     }));
                 },
             });
