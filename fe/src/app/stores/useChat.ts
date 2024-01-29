@@ -2,12 +2,9 @@ import { create } from "zustand";
 import { AxiosError } from "axios";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 
-const THE_END =
-    "6f147e8ca3d5eeb01779c95b463fd1a8452a73419f8060af84eda9781be51d0c";
-
 type eventSourceData = {
-    response: string[];
-    history: string[];
+    streamingResponse: string[];
+    fullResponse: string;
 };
 
 interface State {
@@ -27,7 +24,7 @@ interface State {
 }
 
 const useChat = create<State>((set) => ({
-    eventSourceData: { response: [], history: [] },
+    eventSourceData: { streamingResponse: [], fullResponse: "" },
     isLoading: false,
     error: null,
     eventSource: async ({ aiID, prompt, userID }) => {
@@ -44,26 +41,28 @@ const useChat = create<State>((set) => ({
                     ai_id: aiID,
                     prompt: prompt,
                 }),
+                // Set the streaming response one char at a time
                 onmessage(event) {
                     set((state) => ({
                         eventSourceData: {
-                            response: [
-                                ...state.eventSourceData.response,
+                            streamingResponse: [
+                                ...state.eventSourceData.streamingResponse,
                                 event.data,
                             ],
-                            history: [...state.eventSourceData.history],
+                            fullResponse: "",
                         },
                         isLoading: false,
                     }));
                 },
+                // Set the full response after the stream has closed
                 onclose() {
                     set((state) => ({
                         eventSourceData: {
-                            history: [
-                                ...state.eventSourceData.history,
-                                state.eventSourceData.response.join(""),
-                            ],
-                            response: [],
+                            fullResponse:
+                                state.eventSourceData.streamingResponse.join(
+                                    ""
+                                ),
+                            streamingResponse: [],
                         },
                     }));
                 },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import useLocalStorage, { LocalStorageKey } from "@/hooks/useLocalStorage";
 import useChat from "@/app/stores/useChat";
@@ -11,6 +11,7 @@ import Button from "@/components/Button";
 
 import styles from "./page.module.css";
 import ChatHistory from "./components/ChatHistory";
+import useChatHistory from "@/app/stores/useChatHistory";
 
 const Chat: React.FC = () => {
     const params = useParams();
@@ -31,12 +32,33 @@ const Chat: React.FC = () => {
         });
     };
 
+    const postChatHistory = useChatHistory((state) => state.post);
+    const chatHistoryData = useChatHistory((state) => state.postData);
+
+    useEffect(() => {
+        // TODO Figure out how to do this without a useEffect?
+        // Maybe update a state when the fullresponse is received
+        // How to save the input text but still remove it for the user after they hit send?
+        postChatHistory({
+            ai_id: params.id as string,
+            prompt: inputText,
+            response: chatEventSourceData.fullResponse,
+            user_id: userID,
+        });
+    }, [
+        chatEventSourceData.fullResponse,
+        inputText,
+        params.id,
+        postChatHistory,
+        userID,
+    ]);
+
     return (
         <main className={styles.main}>
             <h2>Chat 🤖</h2>
             <ChatHistory
-                history={chatEventSourceData.history}
-                response={chatEventSourceData.response}
+                history={chatEventSourceData.fullResponse}
+                response={chatEventSourceData.streamingResponse}
             />
             <div>
                 <form className={styles.chatForm} onSubmit={handleSubmit}>

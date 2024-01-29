@@ -1,7 +1,7 @@
 import styles from "./ChatHistory.module.css";
 
 interface Props {
-    history: string[];
+    history: string;
     response: string[];
 }
 
