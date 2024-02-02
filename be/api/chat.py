@@ -41,7 +41,7 @@ async def chat(
     ai_settings = await select_ai_settings(chat_input.ai_id, user_id)
 
     async def generate_words():
-        for word in llm(chat_input.prompt, stream=True, max_new_tokens=25):
+        for word in llm(chat_input.prompt, stream=True):
             yield f"data: {word}\n\n"
             await asyncio.sleep(0)
 

@@ -9,6 +9,28 @@ router = APIRouter()
 SQL_DATABASE_URL = get_database_url()
 
 
+async def get_all_conversation_data(user_id: str, ai_id: str):
+    table_name = f"{user_id}{ai_id}"
+    conn = await asyncpg.connect(SQL_DATABASE_URL)
+    try:
+        return await conn.fetch(f"SELECT prompt, response FROM {table_name}")
+    finally:
+        await conn.close()
+
+
+class ChatSaveInput(BaseModel):
+    ai_id: str
+
+
+@router.get("/chat-history")
+async def post_chat_history(
+    chat_save_input: ChatSaveInput,
+    user_id: str = Header(..., convert_underscores=False),
+):
+    conversation = await get_all_conversation_data(user_id, chat_save_input.ai_id)
+    return conversation
+
+
 async def insert_prompt_response(ai_id: str, user_id: str, prompt: str, response: str):
     table_name = f"{user_id}{ai_id}"
     conn = await asyncpg.connect(SQL_DATABASE_URL)
@@ -23,15 +45,6 @@ async def insert_prompt_response(ai_id: str, user_id: str, prompt: str, response
             prompt,
             response,
         )
-    finally:
-        await conn.close()
-
-
-async def get_all_conversation_data(user_id: str, ai_id: str):
-    table_name = f"{user_id}{ai_id}"
-    conn = await asyncpg.connect(SQL_DATABASE_URL)
-    try:
-        return await conn.fetch(f"SELECT prompt, response FROM {table_name}")
     finally:
         await conn.close()
 

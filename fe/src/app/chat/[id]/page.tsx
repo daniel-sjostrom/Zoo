@@ -8,58 +8,46 @@ import useChat from "@/app/stores/useChat";
 import Input from "@/components/Input";
 import commonStyles from "@/styles/common.module.css";
 import Button from "@/components/Button";
+import useAISettings from "@/app/stores/useAISettings";
 
 import styles from "./page.module.css";
 import ChatHistory from "./components/ChatHistory";
-import useChatHistory from "@/app/stores/useChatHistory";
 
 const Chat: React.FC = () => {
     const params = useParams();
     const [userID] = useLocalStorage<string>(LocalStorageKey.UserID);
     const chatEventSource = useChat((state) => state.eventSource);
     const chatEventSourceData = useChat((state) => state.eventSourceData);
+    const aiSettingsData = useAISettings((state) => state.getData);
+    const getAiSettings = useAISettings((state) => state.get);
     const [inputText, setInputText] = useState("");
-    const [prompts, setPrompts] = useState<string[]>([]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setPrompts([...prompts, inputText]);
         setInputText("");
         await chatEventSource({
-            userID,
-            aiID: params.id as string,
+            user_id: userID,
+            ai_id: params.id as string,
             prompt: inputText,
         });
     };
 
-    const postChatHistory = useChatHistory((state) => state.post);
-    const chatHistoryData = useChatHistory((state) => state.postData);
-
     useEffect(() => {
-        // TODO Figure out how to do this without a useEffect?
-        // Maybe update a state when the fullresponse is received
-        // How to save the input text but still remove it for the user after they hit send?
-        postChatHistory({
-            ai_id: params.id as string,
-            prompt: inputText,
-            response: chatEventSourceData.fullResponse,
-            user_id: userID,
-        });
-    }, [
-        chatEventSourceData.fullResponse,
-        inputText,
-        params.id,
-        postChatHistory,
-        userID,
-    ]);
+        if (aiSettingsData === undefined) {
+            getAiSettings({ user_id: userID, ai_id: params.id as string });
+        }
+    }, [aiSettingsData, getAiSettings, params.id, userID]);
 
     return (
         <main className={styles.main}>
-            <h2>Chat 🤖</h2>
-            <ChatHistory
-                history={chatEventSourceData.fullResponse}
-                response={chatEventSourceData.streamingResponse}
-            />
+            <div>
+                <div className={commonStyles.space8} />
+                <ChatHistory
+                    history={chatEventSourceData.chatHistory}
+                    streamingResponse={chatEventSourceData.streamingResponse}
+                    aiSettingsName={aiSettingsData?.name}
+                />
+            </div>
             <div>
                 <form className={styles.chatForm} onSubmit={handleSubmit}>
                     <Input onChange={setInputText} value={inputText} />
