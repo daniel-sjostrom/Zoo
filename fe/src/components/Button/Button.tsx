@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./Button.module.css";
 
 interface Props {
-    disabled?: boolean;
+    disabled?: boolean | undefined;
     children: string;
     onClick?: () => void;
 }

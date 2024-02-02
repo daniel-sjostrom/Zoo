@@ -1,20 +1,18 @@
-import { ChatHistory as ChatHistoryType } from "@/app/stores/useChat";
+import useChat from "@/app/stores/useChat";
 import commonStyles from "@/styles/common.module.css";
 
-import styles from "./ChatHistory.module.css";
+import styles from "./Chat.module.css";
 import You from "./components/You";
 import AI from "./components/AI";
+import useAiSettingsName from "./hooks/useAiSettingsName";
 
-interface Props {
-    aiSettingsName: string | undefined;
-    streamingResponse: string[];
-    history: ChatHistoryType[];
-}
+const Chat: React.FC = () => {
+    const chatEventSourceData = useChat((state) => state.eventSourceData);
+    const aiSettingsName = useAiSettingsName();
 
-const ChatHistory: React.FC<Props> = (props) => {
     return (
         <div className={styles.container}>
-            {props.history.map((item, i) => (
+            {chatEventSourceData.chatHistory.map((item, i) => (
                 <>
                     <div
                         key={i}
@@ -25,9 +23,11 @@ const ChatHistory: React.FC<Props> = (props) => {
                         <You prompt={item.prompt} />
                         <div className={commonStyles.space6} />
                         <AI
-                            aiSettingsName={props.aiSettingsName}
+                            aiSettingsName={aiSettingsName}
                             response={item.response}
-                            streamingResponse={props.streamingResponse}
+                            streamingResponse={
+                                chatEventSourceData.streamingResponse
+                            }
                         />
                     </div>
                     <div className={commonStyles.space6} />
@@ -37,4 +37,4 @@ const ChatHistory: React.FC<Props> = (props) => {
     );
 };
 
-export default ChatHistory;
+export default Chat;
