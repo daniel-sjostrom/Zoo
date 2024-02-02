@@ -25,7 +25,6 @@ const useAISettings = create<State>((set) => ({
     error: null,
     post: async (arg) => {
         set({ isLoading: true, error: null });
-        // TODO Send one message at a time.
         try {
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_API}/chat-history`,

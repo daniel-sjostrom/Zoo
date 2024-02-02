@@ -14,6 +14,7 @@ import styles from "./page.module.css";
 import ChatHistory from "./components/ChatHistory";
 
 const Chat: React.FC = () => {
+    // TODO Refactor and make this function nice
     const params = useParams();
     const [userID] = useLocalStorage<string>(LocalStorageKey.UserID);
     const chatEventSource = useChat((state) => state.eventSource);

@@ -2,21 +2,19 @@
     width: 40em;
 }
 
-.youContainer {
+.chatBox {
     display: flex;
     flex-direction: column;
     width: 100%;
     border: 0;
     padding: 12px 16px;
     border-radius: 12px;
-    cursor: pointer;
     background: var(--background-color);
     color: var(--text-color);
     position: relative;
     box-shadow: -5px 5px 40px 5px rgba(0, 0, 0, 0.33);
     -webkit-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.33);
     -moz-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.33);
-    z-index: 1;
 }
 
 .backgroundColor {
