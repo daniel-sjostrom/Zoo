@@ -10,7 +10,7 @@ SQL_DATABASE_URL = get_database_url()
 
 @app.get("/")
 async def read_root():
-    return {"hello": "Welcome to the super duper backend API 🦸‍♀️"}
+    return {"hello": "Welcome to the Zoo backend API 🦁"}
 
 
 app.include_router(ai_settings_router, prefix="/api/v1")

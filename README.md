@@ -1,3 +1,3 @@
-# Super duper
+# Zoo
 
-The monorepo for Super duper 🦸‍♀️
+The monorepo for Zoo 🦁

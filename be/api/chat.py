@@ -10,13 +10,6 @@ from settings import get_database_url
 router = APIRouter()
 SQL_DATABASE_URL = get_database_url()
 
-llm = AutoModelForCausalLM.from_pretrained(
-    "TheBloke/Mistral-7B-Instruct-v0.1-GGUF",
-    model_file="mistral-7b-instruct-v0.1.Q4_K_M.gguf",
-    model_type="mistral",
-    gpu_layers=0,
-)
-
 
 async def select_ai_settings(id: str, user_id: str):
     conn = await asyncpg.connect(SQL_DATABASE_URL)
