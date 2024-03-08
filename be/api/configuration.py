@@ -72,7 +72,7 @@ def generate_random_robot():
     return f"{random_adjective} {random_robot}"
 
 
-@router.get("/ai-store")
+@router.get("/configuration")
 async def get_ai_store():
     return {
         "name_suggestion": generate_random_robot(),
