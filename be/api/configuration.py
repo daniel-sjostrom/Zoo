@@ -72,6 +72,8 @@ def generate_random_robot():
     return f"{random_adjective} {random_robot}"
 
 
+# TODO Refactor this to work with the new design
+# TODO create user id somewhere, maybe here?
 @router.get("/configuration")
 async def get_ai_store():
     return {
