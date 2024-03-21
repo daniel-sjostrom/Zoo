@@ -1,0 +1,81 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14;
+    border-radius: 50px;
+    padding-top: var(--space);
+    padding-bottom: var(--space);
+    padding-left: calc(var(--space) * 2);
+    padding-right: calc(var(--space) * 2);
+    background-color: var(--color-sand);
+    font-weight: 600;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background-color: var(--color-white);
+    font-size: 900;
+    border: var(--stroke-small) var(--color-grey);
+}
+
+.disabled {
+    cursor: auto;
+    background-color: var(--color-grey);   
+}
+
+.blue_background {
+    background-color: var(--color-blue);
+    color: var(--color-white);
+}
+
+.sand_background {
+    background-color: var(--color-sand);
+}
+
+.pink_background {
+    background-color: var(--color-pink);
+}
+
+.purple_background {
+    background-color: var(--color-purple);
+}
+
+.grey_background {
+    background-color: var(--color-grey);
+}
+
+.blue_stroke {
+    border: var(--stroke) var(--color-blue);
+    background-color: transparent;
+}
+
+.sand_stroke {
+    border: var(--stroke) var(--color-sand);
+    background-color: transparent;
+}
+
+.pink_stroke {
+    border: var(--stroke) var(--color-pink);
+    background-color: transparent;
+}
+
+.purple_stroke {
+    border: var(--stroke) var(--color-purple);
+    background-color: transparent;
+}
+
+.grey_stroke {
+    border: var(--stroke) var(--color-grey);
+    background-color: transparent;
+}

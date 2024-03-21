@@ -1,0 +1,19 @@
+.horizontal1 {
+    width: calc(var(--space));
+}
+
+.horizontal2 {
+    width: calc(var(--space) * 2);
+}
+
+.horizontal3 {
+    width: calc(var(--space) * 3);
+}
+
+.horizontal4 {
+    width: calc(var(--space) * 4);
+}
+
+.horizontal5 {
+    width: calc(var(--space) * 5);
+}

@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Header
-from ctransformers import AutoModelForCausalLM
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import asyncpg

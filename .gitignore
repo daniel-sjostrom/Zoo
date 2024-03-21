@@ -28,3 +28,5 @@
 *__pycache__
 /be/api/__pycache__
 /fe/node_modules
+
+/data

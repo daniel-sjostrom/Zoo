@@ -1,0 +1,19 @@
+.vertical1 {
+    height: calc(var(--space));
+}
+
+.vertical2 {
+    height: calc(var(--space) * 2);
+}
+
+.vertical13 {
+    height: calc(var(--space) * 3);
+}
+
+.vertical4 {
+    height: calc(var(--space) * 4);
+}
+
+.vertical5 {
+    height: calc(var(--space) * 5);
+}
