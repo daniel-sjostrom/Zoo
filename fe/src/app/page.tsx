@@ -6,14 +6,21 @@ import Button from "@/components/Button";
 import { Vertical4 } from "@/components/HorizontalVertical/Vertical";
 
 import styles from "./page.module.css";
+import useGenerateIds from "./stores/useGenerateIds";
+import { useEffect } from "react";
 
 const Home = () => {
     const router = useRouter();
+    const { get, getData } = useGenerateIds();
 
-    // Define the click handler function
     const handleClick = () => {
-        router.push("/chat"); // Use the push method to navigate
+        get();
+        router.push("/chat");
     };
+
+    useEffect(() => {
+        console.log(getData);
+    }, [getData]);
 
     return (
         <main className={styles.main}>

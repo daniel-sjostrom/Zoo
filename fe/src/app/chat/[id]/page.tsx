@@ -31,9 +31,8 @@ const ChatPage: React.FC = () => {
                             inputText.length === 0 ||
                             eventSourceData.streamingResponse.length > 0
                         }
-                    >
-                        ↑
-                    </Button>
+                        text={"↑"}
+                    />
                 </form>
                 <div className={commonStyles.space8} />
             </div>
