@@ -4,7 +4,7 @@ import styles from "./Button.module.css";
 
 interface Props {
     disabled?: boolean | undefined;
-    children: string;
+    text: string;
     onClick?: () => void;
 }
 
@@ -23,14 +23,12 @@ const Button: React.FC<Props> = (props) => {
         <div>
             <button
                 onClick={props.onClick}
-                className={`${styles.button} ${isHovered && styles.hovered} ${
-                    props.disabled && styles.disabled
-                }`}
+                className={`${styles.button} ${isHovered && styles.hovered}`}
                 onMouseEnter={handleHover}
                 onMouseLeave={handleLeave}
                 disabled={props.disabled}
             >
-                {props.children}
+                {props.text}
             </button>
         </div>
     );
