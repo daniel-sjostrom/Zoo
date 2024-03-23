@@ -26,6 +26,7 @@ class ChatInput(BaseModel):
     prompt: str
 
 
+# TODO Get this thing to work with ollama
 @router.post("/chat")
 async def chat(
     chat_input: ChatInput, user_id: str = Header(..., convert_underscores=False)
