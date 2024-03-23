@@ -4,6 +4,7 @@ from uuid import uuid4
 router = APIRouter()
 
 
+# TODO Save generated ids in the db
 @router.get("/generate-ids")
 async def generate_ids():
     userid = uuid4()

@@ -15,7 +15,8 @@ const ChatPage: React.FC = () => {
     const [inputText, setInputText] = useState("");
     const handleSubmit = useSubmitPrompt(inputText, setInputText);
     const eventSourceData = useChat((state) => state.eventSourceData);
-
+    // TODO Load a new session with the ids that were generated
+    // TODO implement a create new button?
     return (
         <main className={styles.main}>
             <div>
