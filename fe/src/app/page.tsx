@@ -1,32 +1,32 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 import Button from "@/components/Button";
 import { Vertical4 } from "@/components/HorizontalVertical/Vertical";
+import useLocalStorage, { LocalStorageKey } from "@/hooks/useLocalStorage";
+import { copy } from "@/copy/en";
+import useCreateNew from "@/hooks/useCreateNew";
 
 import styles from "./page.module.css";
-import useGenerateIds from "./stores/useGenerateIds";
-import { useEffect } from "react";
+import useIDs from "./stores/useIDs";
 
 const Home = () => {
-    const router = useRouter();
-    const { get, getData } = useGenerateIds();
-
-    const handleClick = () => {
-        get();
-        router.push("/chat");
-    };
+    const IDsGetData = useIDs((state) => state.getData);
+    const [_, setUserID] = useLocalStorage(LocalStorageKey.UserID, "");
+    const createNew = useCreateNew();
 
     useEffect(() => {
-        console.log(getData);
-    }, [getData]);
+        if (IDsGetData.user_id) {
+            setUserID(IDsGetData.user_id);
+        }
+    }, [IDsGetData.user_id, setUserID]);
 
     return (
         <main className={styles.main}>
             <h1>🦁 Zoo 🦁</h1>
             <Vertical4 />
-            <Button text={"Hello World"} onClick={handleClick} />
+            <Button text={copy.home_start_here_button} onClick={createNew} />
         </main>
     );
 };

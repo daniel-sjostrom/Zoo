@@ -1,8 +1,14 @@
 .main {
     display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chat {
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 100vh;
     flex-direction: column;
 }
 

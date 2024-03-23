@@ -1,4 +1,4 @@
-from api.generate_ids import router as generate_ids_router
+from api.ids.ids_endpoints import router as ids_router
 from api.chat import router as chat_router
 from api.chat_history import router as chat_history_router
 from settings import get_database_url, get_app
@@ -14,4 +14,4 @@ async def read_root():
 
 app.include_router(chat_router, prefix="/api/v1")
 app.include_router(chat_history_router, prefix="/api/v1")
-app.include_router(generate_ids_router, prefix="/api/v1")
+app.include_router(ids_router, prefix="/api/v1")

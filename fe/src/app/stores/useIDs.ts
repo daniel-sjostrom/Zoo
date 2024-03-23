@@ -13,7 +13,7 @@ interface State {
     get: () => Promise<void>;
 }
 
-const useGenerateIds = create<State>((set) => ({
+const useIDs = create<State>((set) => ({
     getData: { user_id: "", llm_id: "" },
     isLoading: false,
     error: null,
@@ -21,7 +21,7 @@ const useGenerateIds = create<State>((set) => ({
         set({ isLoading: true, error: null });
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_API}/generate-ids`
+                `${process.env.NEXT_PUBLIC_API}/ids`
             );
 
             const { user_id, llm_id } = response.data;
@@ -41,4 +41,4 @@ const useGenerateIds = create<State>((set) => ({
     },
 }));
 
-export default useGenerateIds;
+export default useIDs;
