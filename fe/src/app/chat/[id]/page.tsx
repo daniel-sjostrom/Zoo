@@ -7,13 +7,13 @@ import Button from "@/components/Button";
 import useChat from "@/app/stores/useChat";
 import { copy } from "@/copy/en";
 import useCreateNew from "@/hooks/useCreateNew";
-import { Vertical8 } from "@/components/HorizontalVertical/Vertical";
+import { Vertical2, Vertical8 } from "@/components/HorizontalVertical/Vertical";
+import { Horizontal2 } from "@/components/HorizontalVertical/Horizontal";
 
 import styles from "./page.module.css";
 import Chat from "./components/Chat";
 import useSubmitPrompt from "./hooks/useSubmitPrompt";
 import SendButton from "./components/SendButton";
-import { Horizontal2 } from "@/components/HorizontalVertical/Horizontal";
 
 const ChatPage: React.FC = () => {
     const [inputText, setInputText] = useState("");
@@ -41,7 +41,7 @@ const ChatPage: React.FC = () => {
                             text={"↑"}
                         />
                     </form>
-                    <Vertical8 />
+                    <Vertical2 />
                 </div>
             </div>
         </main>
