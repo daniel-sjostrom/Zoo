@@ -17,3 +17,15 @@
 .vertical5 {
     height: calc(var(--space) * 5);
 }
+
+.vertical6 {
+    height: calc(var(--space) * 6);
+}
+
+.vertical7 {
+    height: calc(var(--space) * 7);
+}
+
+.vertical8 {
+    height: calc(var(--space) * 8);
+}

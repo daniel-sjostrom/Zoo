@@ -19,3 +19,15 @@ export const Vertical4: React.FC = () => {
 export const Vertical5: React.FC = () => {
     return <div className={styles.vertical5} />;
 };
+
+export const Vertical6: React.FC = () => {
+    return <div className={styles.vertical6} />;
+};
+
+export const Vertical7: React.FC = () => {
+    return <div className={styles.vertical7} />;
+};
+
+export const Vertical8: React.FC = () => {
+    return <div className={styles.vertical8} />;
+};

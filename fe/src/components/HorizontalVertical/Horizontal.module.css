@@ -17,3 +17,15 @@
 .horizontal5 {
     width: calc(var(--space) * 5);
 }
+
+.horizontal6 {
+    width: calc(var(--space) * 6);
+}
+
+.horizontal7 {
+    width: calc(var(--space) * 7);
+}
+
+.horizontal8 {
+    width: calc(var(--space) * 8);
+}

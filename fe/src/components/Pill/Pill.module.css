@@ -26,7 +26,7 @@
     border-radius: 10px;
     background-color: var(--color-white);
     font-size: 900;
-    border: var(--stroke-small) var(--color-grey);
+    border: var(--border-small) var(--color-grey);
 }
 
 .disabled {
@@ -56,26 +56,26 @@
 }
 
 .blue_stroke {
-    border: var(--stroke) var(--color-blue);
+    border: var(--border) var(--color-blue);
     background-color: transparent;
 }
 
 .sand_stroke {
-    border: var(--stroke) var(--color-sand);
+    border: var(--border) var(--color-sand);
     background-color: transparent;
 }
 
 .pink_stroke {
-    border: var(--stroke) var(--color-pink);
+    border: var(--border) var(--color-pink);
     background-color: transparent;
 }
 
 .purple_stroke {
-    border: var(--stroke) var(--color-purple);
+    border: var(--border) var(--color-purple);
     background-color: transparent;
 }
 
 .grey_stroke {
-    border: var(--stroke) var(--color-grey);
+    border: var(--border) var(--color-grey);
     background-color: transparent;
 }

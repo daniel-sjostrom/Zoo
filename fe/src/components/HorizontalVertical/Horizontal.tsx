@@ -19,3 +19,15 @@ export const Horizontal4: React.FC = () => {
 export const Horizontal5: React.FC = () => {
     return <div className={styles.horizontal5} />;
 };
+
+export const Horizontal6: React.FC = () => {
+    return <div className={styles.horizontal6} />;
+};
+
+export const Horizontal7: React.FC = () => {
+    return <div className={styles.horizontal7} />;
+};
+
+export const Horizontal8: React.FC = () => {
+    return <div className={styles.horizontal8} />;
+};

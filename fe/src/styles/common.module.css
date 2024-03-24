@@ -1,4 +1,5 @@
 /* Spacing vertical */
+/* TODO Get rid of this file */
 .space1 {
     height: calc(var(--space));
 }
@@ -30,29 +31,3 @@
 .space8 {
   height: calc(var(--space) * 8);
 }
-
-/* Spacing horizontal */
-.space_horizontal1 {
-  width: calc(var(--space));
-}
-
-.space_horizontal2 {
-  width: calc(var(--space) * 2);
-}
-
-.space_horizontal3 {
-  width: calc(var(--space) * 3);
-}
-
-.space_horizontal4 {
-  width: calc(var(--space) * 4);
-}
-
-.space_horizontal5 {
-  width: calc(var(--space) * 5);
-}
-
-.space_horizontal6 {
-  width: calc(var(--space) * 6);
-}
-

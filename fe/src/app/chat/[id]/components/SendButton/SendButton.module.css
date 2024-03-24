@@ -1,0 +1,28 @@
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: var(--border);
+    height: 43px;
+    width: 43px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 20px;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    border-color: var(--color-grey);
+    box-shadow: var(--box-shadow);
+    -webkit-box-shadow: var(--webkit-box-shadow);
+    -moz-box-shadow: var(--moz-box-shadow);
+}
+
+.disabled {
+    cursor: not-allowed;
+    background-color: var(--color-grey);
+    border-color: var(--color-off-white);
+    color: var(--color-white);
+    box-shadow: var(--box-shadow-light);
+    -webkit-box-shadow: var(--webkit-box-shadow-light);
+    -moz-box-shadow: var(--moz-box-shadow-light);
+}
+  
