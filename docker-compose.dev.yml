@@ -1,20 +1,6 @@
 version: '3.8'
 
 services:
-  ollama:
-    image: ollama/ollama
-    ports:
-      - "11434:11434"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [ gpu ]
-    volumes:
-      - ./data/ollama:/root/.ollama
-
   fastapi:
     build:
       context: ./be
@@ -38,7 +24,5 @@ services:
       - "3000:3000"
     env_file:
       - .env
-    environment:
-      OLLAMA_HOST: "http://ollama:11434"   
     volumes:
       - ./fe:/app

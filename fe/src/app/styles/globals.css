@@ -18,6 +18,9 @@
   --box-shadow: -5px 5px 40px 0px rgba(0,0,0,0.15);
   --webkit-box-shadow: -5px 5px 40px 0px rgba(0,0,0,0.15);
   --moz-box-shadow: -5px 5px 40px 0px rgba(0,0,0,0.15);
+  --box-shadow-light: -5px 5px 40px 0px rgba(0,0,0,0.05);
+  --webkit-box-shadow-light: -5px 5px 40px 0px rgba(0,0,0,0.05);
+  --moz-box-shadow-light: -5px 5px 40px 0px rgba(0,0,0,0.05);
   --space: 4px;
 }
 

@@ -2,12 +2,19 @@
     flex: 1;
     padding: 10px 16px;
     border: 3px solid;
-    border-color: var(--button-color-border);
+    border-color: var(--color-off-white);
     border-radius: 12px;
     font-size: 14px;
     outline: none;
     background-color: var(--background-color);
-    box-shadow: -5px 5px 40px 5px rgba(0, 0, 0, 0.33);
-    -webkit-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.33);
-    -moz-box-shadow: -5px 5px 40px 5px rgba(0,0,0,0.33);
+    box-shadow: var(--box-shadow-light);
+    -webkit-box-shadow: var(--webkit-box-shadow-light);
+    -moz-box-shadow: var(--moz-box-shadow-light);
+}
+
+.focused {
+    border-color: var(--color-grey);
+    box-shadow: var(--box-shadow);
+    -webkit-box-shadow: var(--webkit-box-shadow);
+    -moz-box-shadow: var(--moz-box-shadow);
 }

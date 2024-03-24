@@ -1,5 +1,5 @@
 from api.ids.ids_endpoints import router as ids_router
-from api.chat import router as chat_router
+from api.chat.chat_endpoints import router as chat_router
 from api.chat_history import router as chat_history_router
 from settings import get_database_url, get_app
 from startup import download_models

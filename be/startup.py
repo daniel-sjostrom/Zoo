@@ -2,7 +2,7 @@ import ollama
 import httpx
 import time
 
-ollama_client = ollama.Client(host="http://ollama:11434")
+ollama_client = ollama.Client(host="http://host.docker.internal:11434")
 
 
 async def download_models():
@@ -14,7 +14,8 @@ async def download_models():
                 ollama_client.pull("gemma:7b")
                 print("Download gemma:7b completed.")
             else:
-                print("gemma:7b already downloaded")
+                print("Models are already downloaded.")
+                print(ollama_client.list()["models"])
             break
         except httpx.ConnectError as e:
             print(f"Connection to Ollama failed, retrying... ({e})")

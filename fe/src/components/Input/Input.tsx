@@ -12,6 +12,7 @@ interface Props {
 
 const Input: React.FC<Props> = (props) => {
     const [_, setInput] = useState<string>("");
+    const [isFocused, setOnFocus] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
@@ -30,13 +31,23 @@ const Input: React.FC<Props> = (props) => {
         props.onChange(e.target.value);
     };
 
+    const handleOnFocus = () => {
+        setOnFocus(true);
+    };
+
+    const handleOnBlur = () => {
+        setOnFocus(false);
+    };
+
     return (
         <input
             ref={inputRef}
-            className={styles.input}
+            className={`${styles.input} ${isFocused ? styles.focused : ""}`}
             type="text"
             value={props.value}
             onChange={handleInputChange}
+            onFocus={handleOnFocus}
+            onBlur={handleOnBlur}
         />
     );
 };
