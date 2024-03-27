@@ -1,4 +1,4 @@
-import commonStyles from "@/styles/common.module.css";
+import { Vertical1, Vertical6 } from "@/components/HorizontalVertical/Vertical";
 
 interface Props {
     aiSettingsName: string | undefined;
@@ -10,16 +10,16 @@ const AI: React.FC<Props> = (props) => {
     return (
         <div>
             <h4>{props.aiSettingsName}</h4>
-            <div className={commonStyles.space1} />
+            <Vertical1 />
             {props.response.length > 0 ? (
                 <>
                     <p>{props.response}</p>
-                    <div className={commonStyles.space6} />
+                    <Vertical6 />
                 </>
             ) : (
                 <>
                     <p>{props.streamingResponse}</p>
-                    <div className={commonStyles.space6} />
+                    <Vertical6 />
                 </>
             )}
         </div>

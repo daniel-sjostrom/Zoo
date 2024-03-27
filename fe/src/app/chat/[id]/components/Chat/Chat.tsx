@@ -1,9 +1,9 @@
 import useChat from "@/app/stores/useChat";
-import commonStyles from "@/styles/common.module.css";
 
 import styles from "./Chat.module.css";
 import You from "./components/You";
 import AI from "./components/AI";
+import { Vertical6 } from "@/components/HorizontalVertical/Vertical";
 
 const Chat: React.FC = () => {
     const chatEventSourceData = useChat((state) => state.eventSourceData);
@@ -14,7 +14,7 @@ const Chat: React.FC = () => {
                 <>
                     <div key={i}>
                         <You prompt={item.prompt} />
-                        <div className={commonStyles.space6} />
+                        <Vertical6 />
                         <AI
                             aiSettingsName={"AI"}
                             response={item.response}
@@ -23,7 +23,7 @@ const Chat: React.FC = () => {
                             }
                         />
                     </div>
-                    <div className={commonStyles.space6} />
+                    <Vertical6 />
                 </>
             ))}
         </div>
