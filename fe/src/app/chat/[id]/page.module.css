@@ -1,6 +1,6 @@
 .main {
     display: flex;
-    min-height: 98vh;
+    height: 98vh;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -10,6 +10,13 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+}
+
+.formContainer {
+    position: sticky;
+    bottom: 0;
+    background-color: var(--color-white);
+    z-index: 1000;
 }
 
 .chatForm {

@@ -20,7 +20,7 @@ const ChatPage: React.FC = () => {
     const handleSubmit = useSubmitPrompt(inputText, setInputText);
     const eventSourceData = useChat((state) => state.eventSourceData);
     const handleCreate = useCreateNew();
-
+    // TODO make the scroll bar follow the text
     return (
         <main className={styles.main}>
             <Button text={copy.chat_create_new} onClick={handleCreate} />
@@ -29,7 +29,8 @@ const ChatPage: React.FC = () => {
                     <Vertical8 />
                     <Chat />
                 </div>
-                <div>
+                <div className={styles.formContainer}>
+                    <Vertical2 />
                     <form className={styles.chatForm} onSubmit={handleSubmit}>
                         <Input onChange={setInputText} value={inputText} />
                         <Horizontal2 />
