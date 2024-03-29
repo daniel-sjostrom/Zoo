@@ -21,7 +21,7 @@ async def chat(
 ):
     stream = ollama_client.chat(
         model="gemma:7b",
-        messages=[{"role": "user", "content": "Why is the sky blue?"}],
+        messages=[{"role": "user", "content": chat_input.prompt}],
         stream=True,
     )
 

@@ -10,7 +10,7 @@ const useSubmitPrompt = (
     const params = useParams();
     const [userID] = useLocalStorage<string>(LocalStorageKey.UserID);
     const chatEventSource = useChat((state) => state.eventSource);
-    // TODO add so you can prompt the chat
+
     return async (e: React.FormEvent) => {
         e.preventDefault();
         setInputText("");
