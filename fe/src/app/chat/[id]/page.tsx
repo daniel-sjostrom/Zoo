@@ -14,42 +14,14 @@ import styles from "./page.module.css";
 import Chat from "./components/Chat";
 import useSubmitPrompt from "./hooks/useSubmitPrompt";
 import SendButton from "./components/SendButton";
+import useScrollFollow from "./hooks/useScrollFollow";
 
 const ChatPage: React.FC = () => {
     const [inputText, setInputText] = useState("");
     const handleSubmit = useSubmitPrompt(inputText, setInputText);
     const eventSourceData = useChat((state) => state.eventSourceData);
     const handleCreate = useCreateNew();
-
-    // TODO Move this to a separate hook
-    const [isUserScrolledUp, setIsUserScrolledUp] = useState(false);
-    const chatEventSourceData = useChat((state) => state.eventSourceData);
-    const chatContainerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const scrollBarRef = chatContainerRef.current;
-        const onScroll = () => {
-            if (!scrollBarRef) {
-                return;
-            }
-
-            const isAtBottom =
-                scrollBarRef.scrollHeight - scrollBarRef.scrollTop ===
-                scrollBarRef.clientHeight;
-            setIsUserScrolledUp(!isAtBottom);
-        };
-
-        scrollBarRef?.addEventListener("scroll", onScroll);
-
-        return () => scrollBarRef?.removeEventListener("scroll", onScroll);
-    }, []);
-
-    useEffect(() => {
-        if (chatContainerRef.current && !isUserScrolledUp) {
-            const { scrollHeight } = chatContainerRef.current;
-            chatContainerRef.current.scrollTo({ top: scrollHeight });
-        }
-    }, [chatEventSourceData.chatHistory, isUserScrolledUp]);
+    const chatContainerRef = useScrollFollow();
 
     return (
         <main className={styles.main} ref={chatContainerRef}>
