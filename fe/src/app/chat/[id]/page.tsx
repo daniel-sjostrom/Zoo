@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Input from "@/components/Input";
 import Button from "@/components/Button";
@@ -21,11 +21,41 @@ const ChatPage: React.FC = () => {
     const eventSourceData = useChat((state) => state.eventSourceData);
     const handleCreate = useCreateNew();
 
+    // TODO Move this to a separate hook
+    const [isUserScrolledUp, setIsUserScrolledUp] = useState(false);
+    const chatEventSourceData = useChat((state) => state.eventSourceData);
+    const chatContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const scrollBarRef = chatContainerRef.current;
+        const onScroll = () => {
+            if (!scrollBarRef) {
+                return;
+            }
+
+            const isAtBottom =
+                scrollBarRef.scrollHeight - scrollBarRef.scrollTop ===
+                scrollBarRef.clientHeight;
+            setIsUserScrolledUp(!isAtBottom);
+        };
+
+        scrollBarRef?.addEventListener("scroll", onScroll);
+
+        return () => scrollBarRef?.removeEventListener("scroll", onScroll);
+    }, []);
+
+    useEffect(() => {
+        if (chatContainerRef.current && !isUserScrolledUp) {
+            const { scrollHeight } = chatContainerRef.current;
+            chatContainerRef.current.scrollTo({ top: scrollHeight });
+        }
+    }, [chatEventSourceData.chatHistory, isUserScrolledUp]);
+
     return (
-        <main className={styles.main}>
+        <main className={styles.main} ref={chatContainerRef}>
             <Button text={copy.chat_create_new} onClick={handleCreate} />
-            <div className={styles.chat}>
-                <div>
+            <div className={styles.chatAndInput}>
+                <div className={styles.chat}>
                     <Vertical8 />
                     <Chat />
                 </div>

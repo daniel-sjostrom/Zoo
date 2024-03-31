@@ -1,11 +1,16 @@
 .main {
     display: flex;
-    height: 98vh;
     flex-direction: column;
     justify-content: space-between;
+    height: 98vh; /* Make sure it takes up the full viewport height */
+    overflow-y: auto;
 }
 
 .chat {
+    flex-grow: 1;
+}
+
+.chatAndInput {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,9 +25,9 @@
 }
 
 .chatForm {
-    width: 40em;
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 42em;
 }
   
