@@ -7,7 +7,11 @@ import Button from "@/components/Button";
 import useChat from "@/app/stores/useChat";
 import { copy } from "@/copy/en";
 import useCreateNew from "@/hooks/useCreateNew";
-import { Vertical2, Vertical8 } from "@/components/HorizontalVertical/Vertical";
+import {
+    Vertical2,
+    Vertical4,
+    Vertical8,
+} from "@/components/HorizontalVertical/Vertical";
 import { Horizontal2 } from "@/components/HorizontalVertical/Horizontal";
 
 import styles from "./page.module.css";
@@ -25,7 +29,9 @@ const ChatPage: React.FC = () => {
 
     return (
         <main className={styles.main} ref={chatContainerRef}>
-            <Button text={copy.chat_create_new} onClick={handleCreate} />
+            <div className={styles.createNewContainer}>
+                <Button text={copy.chat_create_new} onClick={handleCreate} />
+            </div>
             <div className={styles.chatAndInput}>
                 <div className={styles.chat}>
                     <Vertical8 />
@@ -44,7 +50,7 @@ const ChatPage: React.FC = () => {
                             text={"↑"}
                         />
                     </form>
-                    <Vertical2 />
+                    <Vertical4 />
                 </div>
             </div>
         </main>

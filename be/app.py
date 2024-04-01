@@ -13,6 +13,12 @@ async def on_startup():
     await download_models()
 
 
+# TODO Figure out the next step, suggestions:
+#     - Add a repository and parse it into a vector db
+#     - Make it possible to use RAG with the model from the vector db
+#     - Assign tasks to the model and save the tasks in the db
+#     - Add a task queue
+#     - Markdown reader
 @app.get("/")
 async def read_root():
     return {"hello": "Welcome to the Zoo backend API 🦁"}
